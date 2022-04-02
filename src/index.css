@@ -9,8 +9,10 @@
 main {
   background-color: whitesmoke;
   width: 1440px;
-  height: 1513px;
+  height: 1800px;
 }
+
+/*********************** NAV *************************/
 
 nav {
   width: 1440px;
@@ -25,7 +27,7 @@ nav ul {
   display: flex;
   list-style: none;
   font-size: 16px;
-  padding: 28px 0 32px 117px;
+  padding: 28px 0 32px 55px;
 }
 
 nav li {
@@ -44,7 +46,7 @@ nav a:hover {
 .logo-box {
   width: 32px;
   height: 28px;
-  margin: 30px 0 20px 0;
+  margin: 30px 0 20px -120px;
 }
 
 .logo-arrow {
@@ -53,6 +55,12 @@ nav a:hover {
   position: relative;
   bottom: 28px;
   right: 23px;
+}
+
+.logo-point {
+  position: relative;
+  bottom: 35px;
+  right: 27px;
 }
 
 .controls {
@@ -84,4 +92,64 @@ nav a:hover {
 
 .wheels img {
   margin-left: 2px;
+}
+
+/*********************** CATEGORY PAGE *************************/
+
+.products-section {
+  width: 1440px;
+  height: 1435px;
+  display: flex;
+}
+
+.product-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1300px;
+  margin: auto;
+}
+
+.product-card {
+  width: 385px;
+  height: 444px;
+  margin: 50px 20px 50px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-img {
+  width: 356px;
+  height: 338px;
+  margin: -10px 15px 20px 15px;
+}
+
+.product-card p {
+  width: 90%;
+  text-align: left;
+  font-family: "Raleway", sans-serif;
+  line-height: 28.8px;
+}
+
+.card-name {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.card-price {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.add-cart-btn {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: green;
 }

@@ -9,6 +9,7 @@ const Nav = () => {
             <div className="logo">
                 <img src="./images/svg3.png" className="logo-box" alt="" />
                 <img src="./images/svg19.png" className="logo-arrow" alt="" />
+                <img src="./images/svg 21.png" className="logo-point" alt="" />
             </div>
             <div className="controls">
                 <div className="currency-selector">$ <img src="./images/arrow.png" className="arrow" alt="" /></div>
