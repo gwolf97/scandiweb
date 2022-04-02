@@ -50,6 +50,8 @@ export default function Data(){
 
 
     return(
+      <div>
+        <h2 className="category-name">Category name</h2>
         <section className="products-section">
           <div className="product-cards-container">
             {data.categories[0].products.map(product =>{
@@ -67,5 +69,6 @@ export default function Data(){
             })}
           </div>
         </section>
+        </div>
     )
 }

@@ -1,10 +1,20 @@
+import React from "react"
+
 const Nav = () => {
+    const [women, setWomen] = React.useState({})
+    const [men, setMen] = React.useState({})
+    const [kids, setKids] = React.useState({})
+
+    const colorGreen = {
+        color: "#5ece7b"
+    }
+
     return ( 
         <nav>
             <ul>
-                <li><a href="#">WOMEN</a></li>
-                <li><a href="#">MEN</a></li>
-                <li><a href="#">KIDS</a></li>
+                <li onClick={() => {setWomen(colorGreen); setMen({}) ; setKids({})}} style={women}><a href="#">WOMEN</a></li>
+                <li onClick={() => {setMen(colorGreen); setWomen({}) ; setKids({})}} style={men}><a href="#">MEN</a></li>
+                <li onClick={() => {setKids(colorGreen); setWomen({}) ; setMen({})}} style={kids}><a href="#">KIDS</a></li>
             </ul>
             <div className="logo">
                 <img src="./images/svg3.png" className="logo-box" alt="" />
