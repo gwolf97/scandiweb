@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&family=Roboto:wght@700&display=swap");
 
 * {
   margin: 0;
@@ -118,6 +118,10 @@ li a:active {
   padding: 34px 101px 32px 0;
 }
 
+.currency-selector {
+  cursor: pointer;
+}
+
 .currency-selector .arrow {
   margin-left: 5px;
   padding-bottom: 2px;
@@ -130,6 +134,7 @@ li a:active {
   align-items: center;
   margin-left: 5px;
   padding-bottom: 6px;
+  cursor: pointer;
 }
 
 .cart {
@@ -141,6 +146,35 @@ li a:active {
 
 .wheels img {
   margin-left: 2px;
+}
+
+.cart-amount {
+  background-color: black;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: absolute;
+  padding-bottom: 0px;
+  margin: 0 0 5px 24px;
+}
+/*********************** MINI CART *************************/
+
+.sm-grey-overlay {
+  opacity: 0.5;
+  background-color: lightgrey;
+  height: 58px;
+  margin-top: -8px;
+  position: absolute;
+  width: 1440px;
+}
+
+.lg-grey-overlay {
 }
 
 /*********************** CATEGORY PAGE *************************/

@@ -5,13 +5,8 @@ import React from 'react';
 import Data from './Components/Data';
 
 function App() {
-
-  const [miniCartOpen, setMiniCartOpen] = React.useState(false)
-
-
   return (
     <main>
-      <Nav/>
       <Data/>
     </main>
   );

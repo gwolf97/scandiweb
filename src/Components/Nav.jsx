@@ -1,6 +1,7 @@
+import { printIntrospectionSchema } from "graphql"
 import React from "react"
 
-const Nav = () => {
+const Nav = (props) => {
     const [women, setWomen] = React.useState({})
     const [men, setMen] = React.useState({})
     const [kids, setKids] = React.useState({})
@@ -23,8 +24,8 @@ const Nav = () => {
             </div>
             <div className="controls">
                 <div className="currency-selector">$ <img src="./images/arrow.png" className="arrow" alt="" /></div>
-                <div className="full-cart">
-                    <div className="cart"><img src="./images/Vector.png" alt="" /></div> 
+                <div className="full-cart" onClick={props.toggleCart}>
+                    <div className="cart"><img src="./images/Vector.png" alt="" /></div> {props.cart.length > 0 && <div className="cart-amount"><p>{props.cart.length}</p></div>}
                     <div className="wheels"><img src="./images/wheel.png" alt="" /><img src="./images/wheel.png" alt="" /></div>
                 </div>
             </div>
