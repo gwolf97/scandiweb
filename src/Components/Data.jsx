@@ -45,16 +45,15 @@ export default function Data(){
 
     let symbol = cart.length > 0 ? cart[0].prices[0].currency.symbol : ""
 
-    //add an onclick to the add to cart button that can console.log the data of the item to then be transfered to cart
-    //product card will also need to console.log product data when clicked to then be transfered to product page
+    //product card will need to console.log product data when clicked to then be transfered to product page
 
 
 
     return(
       <div>
         <Nav cart={cart} toggleCart={toggleCart}/>
-        <div style={cartOpen ? {opacity:"0.8", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
         {cartOpen && <MiniCart symbol={symbol} cart={cart}/>}
+        <div style={cartOpen ? {opacity:"0.7", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
         <h2 className="category-name">Category name</h2>
         <section className="products-section">
           <div className="product-cards-container">

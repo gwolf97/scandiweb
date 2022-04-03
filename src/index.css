@@ -171,7 +171,8 @@ li a:active {
   position: absolute;
   background-color: white;
   margin-left: 1015px;
-  opacity: initial;
+  margin-top: 50px;
+  opacity: 1;
   z-index: 1;
   display: grid;
   grid-auto-columns: 1fr;
@@ -209,6 +210,7 @@ li a:active {
 .mini-product img {
   width: 105px;
   height: 137px;
+  opacity: 1;
 }
 
 .mini-product {
@@ -262,6 +264,11 @@ li a:active {
   margin: 0 8px 0 0;
 }
 
+.unavailable {
+  opacity: 0.5;
+  background-color: lightgrey;
+}
+
 .mini-name,
 .mini-price {
   font-family: "Raleway", sans-serif;
@@ -295,6 +302,7 @@ li a:active {
   border: 1px solid black;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 }
 
 .mini-total {
@@ -325,6 +333,7 @@ li a:active {
   align-items: center;
   font-family: "Raleway", sans-serif;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .view-bag {
