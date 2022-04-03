@@ -11,7 +11,7 @@ const Nav = (props) => {
     }
 
     return ( 
-        <nav>
+        <nav style={{marginBottom:"-58px"}}>
             <ul>
                 <li onClick={() => {setWomen(colorGreen); setMen({}) ; setKids({})}} style={women}><a href="#">WOMEN</a></li>
                 <li onClick={() => {setMen(colorGreen); setWomen({}) ; setKids({})}} style={men}><a href="#">MEN</a></li>

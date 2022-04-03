@@ -1,5 +1,5 @@
 import React from 'react'
-import AddCart from './AddCart';
+import MiniCart from './MiniCart';
 import Nav from './Nav';
 import {useQuery, gql} from '@apollo/client'
 
@@ -32,15 +32,18 @@ export default function Data(){
     const [targetId, setTargetId] = React.useState((""))
     const [cart, setCart] = React.useState([])
     const [cartOpen, setCartOpen] = React.useState(false)
+    
 
     if(loading) return <div>Loading...</div>;
     if(error) return <div>Error</div>;
 
-    console.log(cartOpen)
+    console.log(cart)
 
     function toggleCart(){
       setCartOpen(!cartOpen)
     }
+
+    let symbol = cart.length > 0 ? cart[0].prices[0].currency.symbol : ""
 
     //add an onclick to the add to cart button that can console.log the data of the item to then be transfered to cart
     //product card will also need to console.log product data when clicked to then be transfered to product page
@@ -50,9 +53,8 @@ export default function Data(){
     return(
       <div>
         <Nav cart={cart} toggleCart={toggleCart}/>
-        {cartOpen && <div className="sm-grey-overlay"></div>}
-        <div style={cartOpen ? {opacity:"0.5", backgroundColor:"lightgrey", height:"2000px"} : {}}>
-        
+        <div style={cartOpen ? {opacity:"0.8", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
+        {cartOpen && <MiniCart symbol={symbol} cart={cart}/>}
         <h2 className="category-name">Category name</h2>
         <section className="products-section">
           <div className="product-cards-container">
