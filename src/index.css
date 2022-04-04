@@ -186,6 +186,109 @@ li a:active {
     ".";
 }
 
+.mini-cart {
+  transition: 1s;
+  left: 0;
+  transform: translatey(-100%);
+  -webkit-transform: translatey(-100%);
+}
+
+.slide-in {
+  animation: slide-in 0.5s forwards;
+  -webkit-animation: slide-in 0.5s forwards;
+}
+
+.slide-out {
+  animation: slide-out 0.5s forwards;
+  -webkit-animation: slide-out 0.5s forwards;
+}
+
+@keyframes slide-in {
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@-webkit-keyframes slide-in {
+  100% {
+    -webkit-transform: translateX(0%);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translatey(0%);
+  }
+  100% {
+    transform: translatey(-100%);
+  }
+}
+
+@-webkit-keyframes slide-out {
+  0% {
+    -webkit-transform: translatey(0%);
+  }
+  100% {
+    -webkit-transform: translatey(-100%);
+  }
+}
+
+.fade-in {
+  animation-name: FadeIn;
+  animation-duration: 2s;
+  transition-timing-function: linear;
+}
+
+@keyframes FadeIn {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+@-moz-keyframes FadeIn {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes FadeIn {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+@-o-keyframes FadeIn {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+@-ms-keyframes FadeIn {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
 .mini-cart h3 {
   padding-top: 10px;
   padding-left: 10px;
@@ -317,9 +420,12 @@ li a:active {
 
 .mini-total span {
   font-family: "Raleway", sans-serif;
+  margin-top: 30px;
 }
 
 .mini-btns {
+  margin-top: 15px;
+  margin-bottom: -30px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;

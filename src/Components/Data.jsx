@@ -52,8 +52,8 @@ export default function Data(){
     return(
       <div>
         <Nav cart={cart} toggleCart={toggleCart}/>
-        {cartOpen && <MiniCart symbol={symbol} cart={cart}/>}
-        <div style={cartOpen ? {opacity:"0.7", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
+        {cartOpen && <MiniCart cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
+        <div className={cartOpen ? "fade-in" : ""} style={cartOpen ? {opacity:"0.7", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
         <h2 className="category-name">Category name</h2>
         <section className="products-section">
           <div className="product-cards-container">
