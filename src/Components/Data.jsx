@@ -32,6 +32,10 @@ export default function Data(){
     const [targetId, setTargetId] = React.useState((""))
     const [cart, setCart] = React.useState([])
     const [cartOpen, setCartOpen] = React.useState(false)
+    const total = cart.map(obj => obj.prices[0].amount).reduce((a,b) => a+b, 0).toFixed(2)
+
+    
+    
     
 
     if(loading) return <div>Loading...</div>;
@@ -56,7 +60,7 @@ export default function Data(){
       setCart(newCart)
     }
 
-    console.log(cart)
+  
     
 
 
@@ -70,7 +74,7 @@ export default function Data(){
     return(
       <div>
         <Nav cart={cart} toggleCart={toggleCart}/>
-        {cartOpen && <MiniCart handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
+        {cartOpen && <MiniCart total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
         <div onClick={() => setCartOpen(false)} className={cartOpen ? "fade-in" : ""} style={cartOpen ? {opacity:"0.7", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
         <h2 className="category-name">Category name</h2>
         <section className="products-section">

@@ -20,7 +20,7 @@ const MiniCart = (props) => {
             {props.cart.length > 0 && 
             <div>
                 <div className="mini-total">
-                    <p>Total</p><p><span>{props.symbol}100.00</span></p>
+                    <p>Total</p><p><span>{props.symbol}{props.total}</span></p>
                 </div>
                 <div className="mini-btns">
                     <button className="view-bag">VIEW BAG</button>
