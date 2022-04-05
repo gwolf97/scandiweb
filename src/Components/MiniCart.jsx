@@ -2,7 +2,14 @@ import MiniProduct from "./MiniProduct";
 
 const MiniCart = (props) => {
 
-    const miniProducts = props.cart.map(obj => <MiniProduct img={obj.gallery[0]} price={obj.prices[0].amount} symbol={obj.prices[0].currency.symbol} name={obj.name}/>)
+    let cartWithNoDuplicates = props.cart.reduce(function (previousValue, currentValue) {
+    if (previousValue.indexOf(currentValue) === -1) {
+        previousValue.push(currentValue)
+    }
+    return previousValue
+    }, [])
+
+    const miniProducts = cartWithNoDuplicates.map(obj => <MiniProduct handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} key={obj.name} cart={props.cart} img={obj.gallery[0]} price={obj.prices[0].amount} symbol={obj.prices[0].currency.symbol} name={obj.name}/>)
 
     return ( 
         <div className="mini-cart slide-in">

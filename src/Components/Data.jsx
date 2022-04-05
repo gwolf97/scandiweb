@@ -37,11 +37,28 @@ export default function Data(){
     if(loading) return <div>Loading...</div>;
     if(error) return <div>Error</div>;
 
-    console.log(cart)
 
     function toggleCart(){
       setCartOpen(!cartOpen)
     }
+
+    function handleAdd(e) {
+      const newItem = data.categories[0].products.filter(obj => obj.gallery[0] === e.target.parentElement.parentNode.childNodes[2].currentSrc)
+      setCart(prev => [...prev, newItem[0]])
+    }
+
+    
+    function handleSubtract(e) {
+      const item = data.categories[0].products.filter(obj => obj.gallery[0] === e.target.parentElement.parentNode.childNodes[2].currentSrc)
+      let idx = cart.lastIndexOf(item[0])
+
+      //figuring out how to splice the desired object out of the cart
+
+    }
+
+    
+
+
 
     let symbol = cart.length > 0 ? cart[0].prices[0].currency.symbol : ""
 
@@ -52,8 +69,8 @@ export default function Data(){
     return(
       <div>
         <Nav cart={cart} toggleCart={toggleCart}/>
-        {cartOpen && <MiniCart cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
-        <div className={cartOpen ? "fade-in" : ""} style={cartOpen ? {opacity:"0.7", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
+        {cartOpen && <MiniCart handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
+        <div onClick={() => setCartOpen(false)} className={cartOpen ? "fade-in" : ""} style={cartOpen ? {opacity:"0.7", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
         <h2 className="category-name">Category name</h2>
         <section className="products-section">
           <div className="product-cards-container">
@@ -62,9 +79,9 @@ export default function Data(){
                 <div onMouseOver={() => {
                   setIsHovering(true) ; setTargetId(product.id)
                 }}  key={product.id} className="product-card">
-                    {!product.inStock ? <img style={{opacity:"0.4"}} src={product.gallery[0]} className="card-img" alt="" /> : <img src={product.gallery[0]} className="card-img" alt="" />}
+                    {!product.inStock ? <img style={{opacity:"0.4"}} src={product.gallery[0]} className="card-img" alt="" /> : <img src={product.gallery[0]} className="card-img" alt=""/>}
                     {!product.inStock && <div className="out-of-stock">OUT OF STOCK</div>}
-                    {isHovering && product.inStock && targetId === product.id &&  
+                    {isHovering && product.inStock && !cartOpen && targetId === product.id &&  
                     <div className="add-cart-btn" onClick={() => setCart(prev => [...prev, product])}>
                       <img className="add-cart" src="./images/white-cart.png" alt="" />
                     <div className="add-wheels">
