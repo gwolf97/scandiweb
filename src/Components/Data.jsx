@@ -47,15 +47,16 @@ export default function Data(){
       setCart(prev => [...prev, newItem[0]])
     }
 
-    
+
     function handleSubtract(e) {
       const item = data.categories[0].products.filter(obj => obj.gallery[0] === e.target.parentElement.parentNode.childNodes[2].currentSrc)
       let idx = cart.lastIndexOf(item[0])
-
-      //figuring out how to splice the desired object out of the cart
-
+      let newCart = [...cart]
+      let removed = newCart.splice(idx, 1)
+      setCart(newCart)
     }
 
+    console.log(cart)
     
 
 
