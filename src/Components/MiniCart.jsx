@@ -11,7 +11,7 @@ const MiniCart = (props) => {
 
     let currency = props.currency
 
-    const miniProducts = cartWithNoDuplicates.map(obj => <MiniProduct handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} key={obj.name} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
+    const miniProducts = cartWithNoDuplicates.map(obj => <MiniProduct brand={obj.brand} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} key={obj.name} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
 
     return ( 
         <div className="mini-cart slide-in">
@@ -25,7 +25,7 @@ const MiniCart = (props) => {
                     <p>Total</p><p><span>{props.symbol}{props.total}</span></p>
                 </div>
                 <div className="mini-btns">
-                    <button className="view-bag">VIEW BAG</button>
+                    <button onClick={props.viewCartPage} className="view-bag">VIEW BAG</button>
                     <button className="check-out">CHECK OUT</button>
                 </div>
             </div>

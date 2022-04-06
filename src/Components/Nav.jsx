@@ -2,9 +2,9 @@ import { printIntrospectionSchema } from "graphql"
 import React from "react"
 
 const Nav = (props) => {
-    const [women, setWomen] = React.useState({})
-    const [men, setMen] = React.useState({})
-    const [kids, setKids] = React.useState({})
+    const [all, setAll] = React.useState({ color: "#5ece7b"})
+    const [tech, setTech] = React.useState({})
+    const [clothes, setClothes] = React.useState({})
 
     const colorGreen = {
         color: "#5ece7b"
@@ -13,9 +13,9 @@ const Nav = (props) => {
     return ( 
         <nav style={{marginBottom:"-58px"}}>
             <ul>
-                <li onClick={() => {setWomen(colorGreen); setMen({}) ; setKids({})}} style={women}><a href="#">WOMEN</a></li>
-                <li onClick={() => {setMen(colorGreen); setWomen({}) ; setKids({})}} style={men}><a href="#">MEN</a></li>
-                <li onClick={() => {setKids(colorGreen); setWomen({}) ; setMen({})}} style={kids}><a href="#">KIDS</a></li>
+                <li onClick={() => {setAll(colorGreen); setTech({}) ; setClothes({})}} style={all}><a onClick={props.categoryNav} href="#">ALL</a></li>
+                <li onClick={() => {setTech(colorGreen); setAll({}) ; setClothes({})}} style={tech}><a onClick={props.categoryNav} href="#">TECH</a></li>
+                <li onClick={() => {setClothes(colorGreen); setAll({}) ; setTech({})}} style={clothes}><a onClick={props.categoryNav} href="#">CLOTHES</a></li>
             </ul>
             <div className="logo">
                 <img src="./images/svg3.png" className="logo-box" alt="" />

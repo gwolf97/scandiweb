@@ -18,6 +18,7 @@ const amountOfItems = data.reduce(function(obj, name) {
         <div className="mini-product" key={props.name}>
             <div className="mini-description">
                 <div className="mini-details">
+                    <p className="mini-brand">{props.brand}</p>
                     <p className="mini-name">{props.name}</p>
                     <p className="mini-price">{props.symbol}{props.price}</p>
                 </div>

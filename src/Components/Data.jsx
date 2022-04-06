@@ -2,6 +2,7 @@ import React from 'react'
 import MiniCart from './MiniCart';
 import CurrencySelector from './CurrencySelector';
 import Nav from './Nav';
+import CartPage from './CartPage';
 import {useQuery, gql} from '@apollo/client'
 
 const GET_PRODUCTS = gql`
@@ -31,17 +32,31 @@ export default function Data(){
     const {error, data, loading} = useQuery(GET_PRODUCTS);
     const [isHovering, setIsHovering] = React.useState(false)
     const [targetId, setTargetId] = React.useState((""))
+    const [categoryName, setCategoryName] = React.useState("All Products")
     const [cart, setCart] = React.useState([])
     const [cartOpen, setCartOpen] = React.useState(false)
-    const [currencySelectorOpen, setCurrencySelectorOpen] = React.useState(true)
-    const [currency, setCurrency] = React.useState(1)
+    const [showCartPage, setShowCartPage] = React.useState(false)
+    const [currencySelectorOpen, setCurrencySelectorOpen] = React.useState(false)
+    const [currency, setCurrency] = React.useState(0)
+    const [category,setCategory] = React.useState({
+      category1:"tech",
+      category2:"clothes"
+    })
     let symbol = cart.length > 0 ? cart[0].prices[currency].currency.symbol : ""
-    const total = cart.map(obj => obj.prices[currency].amount).reduce((a,b) => a+b, 0).toFixed(2)
-
-    
+    const total = cart.map(obj => obj.prices[currency].amount).reduce((a,b) => a+b, 0).toFixed(2)   
 
     if(loading) return <div>Loading...</div>;
     if(error) return <div>Error</div>;
+
+    function categoryNav(e){
+      e.target.innerText === "ALL" && setCategory({ category1:"tech",category2:"clothes"}) ; setCategoryName("All Products")
+      e.target.innerText === "TECH" && setCategory({ category1:"tech",category2:""}) ; setCategoryName("Tech")
+      e.target.innerText === "CLOTHES" && setCategory({ category1:"clothes",category2:""}) ; setCategoryName("Clothes")
+      e.target.innerText === "ALL" && setCategoryName("All Products")
+      e.target.innerText === "TECH" && setCategoryName("Tech")
+      e.target.innerText === "CLOTHES" && setCategoryName("Clothes")
+      setShowCartPage(false)
+    }
 
 
     function toggleCart(){
@@ -75,19 +90,24 @@ export default function Data(){
       setCart(newCart)
     }
 
+    function viewCartPage(){
+      setShowCartPage(true)
+      setCartOpen(false)
+    }
+
  
 
 
     return(
       <div>
-        <Nav selectorOpen={currencySelectorOpen} toggleSelector={toggleCurrencySelector} cart={cart} toggleCart={toggleCart}/>
+        <Nav categoryNav={categoryNav} selectorOpen={currencySelectorOpen} toggleSelector={toggleCurrencySelector} cart={cart} toggleCart={toggleCart}/>
         {currencySelectorOpen && <CurrencySelector changeCurrency={changeCurrency}/>}
-        {cartOpen && <MiniCart currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
+        {cartOpen && <MiniCart viewCartPage={viewCartPage} currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
         <div onClick={() => {setCartOpen(false) ; setCurrencySelectorOpen(false)}} className={cartOpen ? "fade-in" : ""} style={cartOpen ? {opacity:"0.7", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
-        <h2 className="category-name">Category name</h2>
-        <section className="products-section">
+        <h2 style={showCartPage ? {display: "none"} : {}} className="category-name">{categoryName}</h2>
+        <section style={showCartPage ? {display: "none"} : {}}  className="products-section">
           <div className="product-cards-container">
-            {data.categories[0].products.map(product =>{
+            {data.categories[0].products.filter(obj => obj.category === category.category1 || obj.category === category.category2).map(product =>{
                 return(
                 <div onMouseOver={() => {
                   setIsHovering(true) ; setTargetId(product.id)
@@ -102,13 +122,14 @@ export default function Data(){
                       <img src="./images/white-wheel.png" alt="" />
                      </div>
                     </div>}
-                    <p className="card-name">{product.name}</p>
+                    <p className="card-name">{product.brand} {product.name}</p>
                     <p className="card-price">{product.prices[currency].currency.symbol}{product.prices[currency].amount}</p>
                 </div>
                 )
             })}
           </div>
         </section>
+            {showCartPage && <CartPage/>}
         </div>
         </div>
     )
