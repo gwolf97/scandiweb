@@ -1,5 +1,6 @@
 import React from 'react'
 import MiniCart from './MiniCart';
+import CurrencySelector from './CurrencySelector';
 import Nav from './Nav';
 import {useQuery, gql} from '@apollo/client'
 
@@ -32,10 +33,11 @@ export default function Data(){
     const [targetId, setTargetId] = React.useState((""))
     const [cart, setCart] = React.useState([])
     const [cartOpen, setCartOpen] = React.useState(false)
-    const total = cart.map(obj => obj.prices[0].amount).reduce((a,b) => a+b, 0).toFixed(2)
+    const [currencySelectorOpen, setCurrencySelectorOpen] = React.useState(true)
+    const [currency, setCurrency] = React.useState(1)
+    let symbol = cart.length > 0 ? cart[0].prices[currency].currency.symbol : ""
+    const total = cart.map(obj => obj.prices[currency].amount).reduce((a,b) => a+b, 0).toFixed(2)
 
-    
-    
     
 
     if(loading) return <div>Loading...</div>;
@@ -44,6 +46,19 @@ export default function Data(){
 
     function toggleCart(){
       setCartOpen(!cartOpen)
+      setCurrencySelectorOpen(false)
+    }
+
+    function toggleCurrencySelector(){
+      setCurrencySelectorOpen(!currencySelectorOpen)
+      setCartOpen(false)
+    }
+
+    function changeCurrency(e){
+      console.log(e)
+      e.target.innerText === "$ USD" && setCurrency(0)
+      e.target.innerText === "£ GBP" && setCurrency(1)
+      e.target.innerText === "¥ JPY" && setCurrency(3)
     }
 
     function handleAdd(e) {
@@ -60,22 +75,15 @@ export default function Data(){
       setCart(newCart)
     }
 
-  
-    
-
-
-
-    let symbol = cart.length > 0 ? cart[0].prices[0].currency.symbol : ""
-
-    //product card will need to console.log product data when clicked to then be transfered to product page
-
+ 
 
 
     return(
       <div>
-        <Nav cart={cart} toggleCart={toggleCart}/>
-        {cartOpen && <MiniCart total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
-        <div onClick={() => setCartOpen(false)} className={cartOpen ? "fade-in" : ""} style={cartOpen ? {opacity:"0.7", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
+        <Nav selectorOpen={currencySelectorOpen} toggleSelector={toggleCurrencySelector} cart={cart} toggleCart={toggleCart}/>
+        {currencySelectorOpen && <CurrencySelector changeCurrency={changeCurrency}/>}
+        {cartOpen && <MiniCart currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
+        <div onClick={() => {setCartOpen(false) ; setCurrencySelectorOpen(false)}} className={cartOpen ? "fade-in" : ""} style={cartOpen ? {opacity:"0.7", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
         <h2 className="category-name">Category name</h2>
         <section className="products-section">
           <div className="product-cards-container">
@@ -95,7 +103,7 @@ export default function Data(){
                      </div>
                     </div>}
                     <p className="card-name">{product.name}</p>
-                    <p className="card-price">{product.prices[0].currency.symbol}{product.prices[0].amount}</p>
+                    <p className="card-price">{product.prices[currency].currency.symbol}{product.prices[currency].amount}</p>
                 </div>
                 )
             })}

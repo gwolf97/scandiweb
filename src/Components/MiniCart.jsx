@@ -9,7 +9,9 @@ const MiniCart = (props) => {
     return previousValue
     }, [])
 
-    const miniProducts = cartWithNoDuplicates.map(obj => <MiniProduct handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} key={obj.name} cart={props.cart} img={obj.gallery[0]} price={obj.prices[0].amount} symbol={obj.prices[0].currency.symbol} name={obj.name}/>)
+    let currency = props.currency
+
+    const miniProducts = cartWithNoDuplicates.map(obj => <MiniProduct handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} key={obj.name} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
 
     return ( 
         <div className="mini-cart slide-in">

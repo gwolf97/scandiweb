@@ -23,7 +23,7 @@ const Nav = (props) => {
                 <img src="./images/svg 21.png" className="logo-point" alt="" />
             </div>
             <div className="controls">
-                <div className="currency-selector">$ <img src="./images/arrow.png" className="arrow" alt="" /></div>
+                <div onClick={props.toggleSelector} className="currency-selector-nav">$ <img src={props.selectorOpen ? "./images/up-arrow-nav.png" : "./images/arrow.png"} className="arrow" alt="" /></div>
                 <div className="full-cart" onClick={props.toggleCart}>
                     <div className="cart"><img src="./images/Vector.png" alt="" /></div> {props.cart.length > 0 && <div className="cart-amount"><p>{props.cart.length}</p></div>}
                     <div className="wheels"><img src="./images/wheel.png" alt="" /><img src="./images/wheel.png" alt="" /></div>
