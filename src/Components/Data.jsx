@@ -129,7 +129,7 @@ export default function Data(){
             })}
           </div>
         </section>
-            {showCartPage && <CartPage/>}
+            {showCartPage && <CartPage currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
         </div>
         </div>
     )
