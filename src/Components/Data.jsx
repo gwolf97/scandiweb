@@ -3,6 +3,7 @@ import MiniCart from './MiniCart';
 import CurrencySelector from './CurrencySelector';
 import Nav from './Nav';
 import CartPage from './CartPage';
+import ProductPage from './ProductPage'
 import {useQuery, gql} from '@apollo/client'
 
 const GET_PRODUCTS = gql`
@@ -32,6 +33,8 @@ export default function Data(){
     const {error, data, loading} = useQuery(GET_PRODUCTS);
     const [isHovering, setIsHovering] = React.useState(false)
     const [targetId, setTargetId] = React.useState((""))
+    const [selectedProduct, setSelectedProduct] = React.useState([])
+    const [showProductPage, setShowProductPage] = React.useState(false)
     const [categoryName, setCategoryName] = React.useState("All Products")
     const [cart, setCart] = React.useState([])
     const [cartOpen, setCartOpen] = React.useState(false)
@@ -56,6 +59,8 @@ export default function Data(){
       e.target.innerText === "TECH" && setCategoryName("Tech")
       e.target.innerText === "CLOTHES" && setCategoryName("Clothes")
       setShowCartPage(false)
+      setShowProductPage(false)
+      setSelectedProduct([])
     }
 
 
@@ -106,10 +111,19 @@ export default function Data(){
     function viewCartPage(){
       setShowCartPage(true)
       setCartOpen(false)
+      setShowProductPage(false)
     }
 
- 
+    function handleSelectedProduct(e) {
+      const productSelected = data.categories[0].products.filter(product => product.name === e.target.childNodes[2].data)
+      productSelected[0].inStock && setSelectedProduct(productSelected)
+      setShowProductPage(true)
+    }
 
+    function productPageAddCart(e) {
+      const newItem = data.categories[0].products.filter(obj => obj.name === e.target.parentElement.childNodes[0].childNodes[2].innerText)
+      setCart(prev => [...prev, newItem[0]])
+    }
 
     return(
       <div>
@@ -117,8 +131,8 @@ export default function Data(){
         {currencySelectorOpen && <CurrencySelector changeCurrency={changeCurrency}/>}
         {cartOpen && <MiniCart viewCartPage={viewCartPage} currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
         <div onClick={() => {setCartOpen(false) ; setCurrencySelectorOpen(false)}} className={cartOpen ? "fade-in" : ""} style={cartOpen ? {opacity:"0.7", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
-        <h2 style={showCartPage ? {display: "none"} : {}} className="category-name">{categoryName}</h2>
-        <section style={showCartPage ? {display: "none"} : {}}  className="products-section">
+        <h2 style={showCartPage || showProductPage ? {display: "none"} : {}} className="category-name">{categoryName}</h2>
+        <section style={showCartPage || showProductPage ? {display: "none"} : {}}  className="products-section">
           <div className="product-cards-container">
             {data.categories[0].products.filter(obj => obj.category === category.category1 || obj.category === category.category2).map(product =>{
                 return(
@@ -135,7 +149,7 @@ export default function Data(){
                       <img src="./images/white-wheel.png" alt="" />
                      </div>
                     </div>}
-                    <p className="card-name">{product.brand} {product.name}</p>
+                    <p onClick={product.inStock ? handleSelectedProduct : null} className={product.inStock ? "card-name hover" : "card-name"}>{product.brand} {product.name}</p>
                     <p className="card-price">{product.prices[currency].currency.symbol}{product.prices[currency].amount}</p>
                 </div>
                 )
@@ -143,6 +157,7 @@ export default function Data(){
           </div>
         </section>
             {showCartPage && <CartPage currency={currency} total={total} handleAdd={handleBagAdd} handleSubtract={handleBagSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
+            {showProductPage && <ProductPage productPageAddCart={productPageAddCart} currency={currency} selectedProduct={selectedProduct}/>}
         </div>
         </div>
     )
