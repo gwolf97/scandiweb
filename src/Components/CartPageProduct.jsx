@@ -12,27 +12,31 @@ const CartPageProduct = (props) => {
         
           const amount = amountOfItems[props.name]
 
-          console.log(amountOfItems)
+    const images = props.gallery.map(obj => <img src={obj}/>)
 
     return ( 
-        <div className="mini-product">
-        <div className="mini-description">
-            <div className="mini-details">
-                <p className="mini-brand">{props.brand}</p>
-                <p className="mini-name">{props.name}</p>
-                <p className="mini-price">{props.symbol}{props.price}</p>
+        <div className="mini-product product">
+        <div className="mini-description description">
+            <div className="mini-details details">
+                <p className="mini-brand brand">{props.brand}</p>
+                <p className="mini-name name">{props.name}</p>
+                <p className="mini-price price">{props.symbol}{props.price}</p>
             </div>
-            <div className="mini-sizes">
-                <div className="mini-size">S</div>
-                <div className="mini-size unavailable">M</div>
+            <div className="mini-sizes sizes">
+                <div className="mini-size size">S</div>
+                <div className="mini-size size dark">M</div>
             </div>
         </div>
-        <div className="mini-controls">
-            <div onClick={props.handleAdd} className="mini-add">+</div>
+        <div className="mini-controls product-controls">
+            <div onClick={props.handleAdd} className="mini-add add">+</div>
             <p className="mini-amount">{amount}</p>
-            <div onClick={props.handleSubtract} className="mini-subtract">-</div>
+            <div onClick={props.handleSubtract} className="mini-subtract subtract">-</div>
         </div>
-        <img src={props.img} alt="" />
+        <div className="gallery">
+            <img src="./images/svg 21.png" alt="" className="gallery-left"/>
+                {images}
+             <img src="./images/svg 21.png" alt="" className="gallery-right"/>
+        </div>
     </div>
      );
 }

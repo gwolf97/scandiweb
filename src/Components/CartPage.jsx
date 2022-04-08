@@ -13,11 +13,13 @@ const CartPage = (props) => {
        
         let currency = props.currency
         
-        const products = cartWithNoDuplicates.map(obj => <CartPageProduct brand={obj.brand} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} key={obj.name} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
+        const products = cartWithNoDuplicates.map(obj => <CartPageProduct brand={obj.brand} gallery={obj.gallery} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
+
+        console.log(cartWithNoDuplicates)
 
     return ( 
         <section className="cart-page-section">
-            <h1>cart page</h1>
+            <h2>CART</h2>
             <div className="cart-page">
                 {products}
             </div>
