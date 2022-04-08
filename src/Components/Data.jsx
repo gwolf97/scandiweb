@@ -81,9 +81,22 @@ export default function Data(){
       setCart(prev => [...prev, newItem[0]])
     }
 
+    function handleBagAdd(e) {
+      const newItem = data.categories[0].products.filter(obj => obj.gallery[0] === e.target.parentElement.parentNode.childNodes[2].childNodes[1].currentSrc)
+      setCart(prev => [...prev, newItem[0]])
+    }
+
 
     function handleSubtract(e) {
       const item = data.categories[0].products.filter(obj => obj.gallery[0] === e.target.parentElement.parentNode.childNodes[2].currentSrc)
+      let idx = cart.lastIndexOf(item[0])
+      let newCart = [...cart]
+      let removed = newCart.splice(idx, 1)
+      setCart(newCart)
+    }
+
+    function handleBagSubtract(e) {
+      const item = data.categories[0].products.filter(obj => obj.gallery[0] === e.target.parentElement.parentNode.childNodes[2].childNodes[1].currentSrc)
       let idx = cart.lastIndexOf(item[0])
       let newCart = [...cart]
       let removed = newCart.splice(idx, 1)
@@ -129,7 +142,7 @@ export default function Data(){
             })}
           </div>
         </section>
-            {showCartPage && <CartPage currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
+            {showCartPage && <CartPage currency={currency} total={total} handleAdd={handleBagAdd} handleSubtract={handleBagSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
         </div>
         </div>
     )

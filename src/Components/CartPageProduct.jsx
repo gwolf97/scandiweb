@@ -12,6 +12,7 @@ const CartPageProduct = (props) => {
         
           const amount = amountOfItems[props.name]
 
+
     const images = props.gallery.map(obj => <img src={obj}/>)
 
     return ( 
@@ -33,9 +34,9 @@ const CartPageProduct = (props) => {
             <div onClick={props.handleSubtract} className="mini-subtract subtract">-</div>
         </div>
         <div className="gallery">
-            <img src="./images/svg 21.png" alt="" className="gallery-left"/>
+            <img onClick={(e) => e.target.parentElement.scrollBy(-100,0)} src="./images/gallery-left.png" alt="" className="gallery-left"/>
                 {images}
-             <img src="./images/svg 21.png" alt="" className="gallery-right"/>
+             <img onClick={(e) => e.target.parentElement.scrollBy(100, 0)} src="./images/gallery-left.png" alt="" className="gallery-right"/>
         </div>
     </div>
      );
