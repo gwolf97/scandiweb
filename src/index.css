@@ -671,7 +671,7 @@ li a:active {
   height: 45px;
 }
 
-.dark {
+.selected-attribute {
   background-color: black;
   color: white;
 }
@@ -802,6 +802,15 @@ li a:active {
 
 .product-size-label {
   margin-bottom: -20px;
+}
+
+.product-page-section .size {
+  cursor: pointer;
+}
+
+.product-page-section .size:hover {
+  cursor: pointer;
+  background-color: rgba(211, 211, 211, 0.651);
 }
 
 .product-price {

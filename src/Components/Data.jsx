@@ -73,7 +73,7 @@ export default function Data(){
       setSelectedProduct([])
     }
 
-    console.log(data)
+    console.log(selectedProduct)
 
     function toggleCart(){
       setCartOpen(!cartOpen)
