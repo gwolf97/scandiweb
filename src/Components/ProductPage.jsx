@@ -7,7 +7,7 @@ const ProductPage = (props) => {
     const currency = props.currency
     const galleryImages = props.selectedProduct[0].gallery.map(src => <img onClick={() => setMainImg(src)} src={src}/>)
 
-    let attributes = props.selectedProduct[0].attributes[0].items.map(attribute => <div className="mini-size size" key={attribute.id}>{attribute.displayValue}</div>)
+    let attributes = props.selectedProduct[0].attributes.length > 0 ? props.selectedProduct[0].attributes[0].items.map(attribute => <div className="mini-size size" key={attribute.id}>{attribute.displayValue}</div>) : <div></div>
 
     function removeTags(str) {
         if ((str===null) || (str===''))
@@ -28,7 +28,7 @@ const ProductPage = (props) => {
                         <h3 className="product-name">{props.selectedProduct[0].name}</h3>
                     </div> 
                     <div className="product-size-price">
-                        <p className="product-sub-title product-size-label">{props.selectedProduct[0].attributes[0].name.toUpperCase()}:</p>
+                        <p className="product-sub-title product-size-label">{props.selectedProduct[0].attributes.length > 0 ? `${props.selectedProduct[0].attributes[0].name.toUpperCase()}:` : ""}</p>
                         <div className="mini-sizes sizes">
                            {attributes}
                         </div>
