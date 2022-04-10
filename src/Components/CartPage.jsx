@@ -15,7 +15,7 @@ const CartPage = (props) => {
         
         const products = cartWithNoDuplicates.map(obj => <CartPageProduct brand={obj.brand} gallery={obj.gallery} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
 
-        console.log(cartWithNoDuplicates)
+      
 
     return ( 
         <section className="cart-page-section">

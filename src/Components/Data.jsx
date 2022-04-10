@@ -24,6 +24,16 @@ query{
         amount
       }
       brand
+      attributes{
+        id
+        name
+        type
+        items{
+          displayValue
+          value
+          id
+        }
+      }
     }
   }
 }
@@ -63,6 +73,7 @@ export default function Data(){
       setSelectedProduct([])
     }
 
+    console.log(data)
 
     function toggleCart(){
       setCartOpen(!cartOpen)
@@ -75,7 +86,6 @@ export default function Data(){
     }
 
     function changeCurrency(e){
-      console.log(e)
       e.target.innerText === "$ USD" && setCurrency(0)
       e.target.innerText === "£ GBP" && setCurrency(1)
       e.target.innerText === "¥ JPY" && setCurrency(3)

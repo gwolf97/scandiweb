@@ -15,7 +15,6 @@ const ProductPage = (props) => {
         return str.replace( /(<([^>]+)>)/ig, '');
     }
 
-    console.log(props.selectedProduct)
     return ( 
         <section className="product-page-section">
             <div className="product-page-container">
