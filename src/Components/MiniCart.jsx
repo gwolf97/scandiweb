@@ -13,6 +13,8 @@ const MiniCart = (props) => {
 
     const miniProducts = cartWithNoDuplicates.map(obj => <MiniProduct brand={obj.brand} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} key={obj.name} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
 
+    console.log(cartWithNoDuplicates)
+
     return ( 
         <div className="mini-cart slide-in">
             {props.cart.length === 0 ? <h3 style={{margin:"220px 0 0 90px"}}>No items in cart</h3> : <h3><span>My Bag.</span> {props.cart.length} item{props.cart.length !== 1 && "s"}</h3>}

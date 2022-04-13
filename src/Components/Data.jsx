@@ -44,6 +44,8 @@ export default function Data(){
     const [isHovering, setIsHovering] = React.useState(false)
     const [targetId, setTargetId] = React.useState((""))
     const [selectedProduct, setSelectedProduct] = React.useState([])
+    const [selectedAttribute, setSelectedAttribute] = React.useState("")
+    const [selectedAttributes, setSelectedAttributes] = React.useState([])
     const [showProductPage, setShowProductPage] = React.useState(false)
     const [categoryName, setCategoryName] = React.useState("All Products")
     const [cart, setCart] = React.useState([])
@@ -55,6 +57,11 @@ export default function Data(){
       category1:"tech",
       category2:"clothes"
     })
+
+    React.useEffect(() => {
+      setSelectedAttributes(prev => [...prev.filter(obj=> obj.id !== selectedAttribute.id), selectedAttribute])
+    }, [selectedAttribute])
+
     let symbol = cart.length > 0 ? cart[0].prices[currency].currency.symbol : ""
     const total = cart.map(obj => obj.prices[currency].amount).reduce((a,b) => a+b, 0).toFixed(2)   
 
@@ -71,9 +78,9 @@ export default function Data(){
       setShowCartPage(false)
       setShowProductPage(false)
       setSelectedProduct([])
+      setSelectedAttribute("")
+      setSelectedAttributes([])
     }
-
-    console.log(selectedProduct)
 
     function toggleCart(){
       setCartOpen(!cartOpen)
@@ -122,6 +129,8 @@ export default function Data(){
       setShowCartPage(true)
       setCartOpen(false)
       setShowProductPage(false)
+      setSelectedAttribute("")
+      setSelectedAttributes([])
     }
 
     function handleSelectedProduct(e) {
@@ -130,10 +139,20 @@ export default function Data(){
       setShowProductPage(true)
     }
 
+    function handleSelectedAttribute(e){
+      setSelectedAttribute({attribute: e.target.innerText, id: e.target.id}) 
+    }
+
+  
+
     function productPageAddCart(e) {
       const newItem = data.categories[0].products.filter(obj => obj.name === e.target.parentElement.childNodes[0].childNodes[2].innerText)
-      setCart(prev => [...prev, newItem[0]])
+      const itemData = newItem[0]
+      const itemWithAttribute = {...itemData, selectedAttributes: selectedAttributes}
+      setCart(prev => [...prev, itemWithAttribute])
     }
+
+console.log(cart)
 
     return(
       <div>
@@ -167,7 +186,7 @@ export default function Data(){
           </div>
         </section>
             {showCartPage && <CartPage currency={currency} total={total} handleAdd={handleBagAdd} handleSubtract={handleBagSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
-            {showProductPage && <ProductPage productPageAddCart={productPageAddCart} currency={currency} selectedProduct={selectedProduct}/>}
+            {showProductPage && <ProductPage selectedAttributes={selectedAttributes} selectedAttribute={selectedAttribute} handleSelectedAttribute={handleSelectedAttribute} productPageAddCart={productPageAddCart} currency={currency} selectedProduct={selectedProduct}/>}
         </div>
         </div>
     )

@@ -671,9 +671,16 @@ li a:active {
   height: 45px;
 }
 
-.selected-attribute {
+.dark {
   background-color: black;
   color: white;
+  width: 63px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.dark:hover {
+  background-color: black;
 }
 
 .product-controls {
