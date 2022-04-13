@@ -152,7 +152,7 @@ export default function Data(){
       setCart(prev => [...prev, itemWithAttribute])
     }
 
-console.log(cart)
+
 
     return(
       <div>

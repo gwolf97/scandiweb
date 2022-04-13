@@ -14,6 +14,8 @@ const amountOfItems = data.reduce(function(obj, name) {
 
   const amount = amountOfItems[props.name]
 
+  let attributeMiniSquares = props.selectedAttributes.map(obj => obj !== "" && <div className={obj.attribute === "No" ? "hide" : "mini-size"}>{obj.attribute === "Yes" ? `${obj.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` : obj.attribute} </div>)
+
     return ( 
         <div className="mini-product" key={props.name}>
             <div className="mini-description">
@@ -23,8 +25,9 @@ const amountOfItems = data.reduce(function(obj, name) {
                     <p className="mini-price">{props.symbol}{props.price}</p>
                 </div>
                 <div className="mini-sizes">
-                    <div className="mini-size">S</div>
-                    <div className="mini-size unavailable">M</div>
+                    <div className="sizes-scroll">
+                    {attributeMiniSquares}
+                    </div>
                 </div>
             </div>
             <div className="mini-controls">

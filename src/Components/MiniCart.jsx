@@ -11,7 +11,7 @@ const MiniCart = (props) => {
 
     let currency = props.currency
 
-    const miniProducts = cartWithNoDuplicates.map(obj => <MiniProduct brand={obj.brand} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} key={obj.name} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
+    const miniProducts = cartWithNoDuplicates.map(obj => <MiniProduct selectedAttributes={obj.selectedAttributes} brand={obj.brand} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} key={obj.name} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
 
     console.log(cartWithNoDuplicates)
 
