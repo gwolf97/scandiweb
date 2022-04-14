@@ -59,7 +59,18 @@ export default function Data(){
     })
 
     React.useEffect(() => {
-      setSelectedAttributes(prev => [...prev.filter(obj=> obj.id !== selectedAttribute.id), selectedAttribute])
+      setSelectedAttributes(prev => [...prev.filter(obj=> obj.id !== selectedAttribute.id), selectedAttribute].sort((a,b) =>{
+        let fa = a.id,
+        fb = b.id;
+
+    if (fa < fb) {
+        return -1;
+    }
+    if (fa > fb) {
+        return 1;
+    }
+    return 0;
+      }))
     }, [selectedAttribute])
 
     let symbol = cart.length > 0 ? cart[0].prices[currency].currency.symbol : ""
@@ -140,7 +151,7 @@ export default function Data(){
     }
 
     function handleSelectedAttribute(e){
-      setSelectedAttribute({attribute: e.target.innerText, id: e.target.id}) 
+      setSelectedAttribute({attribute: e.target.innerText, id: e.target.id,}) 
     }
 
   

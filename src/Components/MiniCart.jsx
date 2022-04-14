@@ -11,9 +11,11 @@ const MiniCart = (props) => {
 
     let currency = props.currency
 
-    const miniProducts = cartWithNoDuplicates.map(obj => <MiniProduct selectedAttributes={obj.selectedAttributes} brand={obj.brand} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} key={obj.name} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
+    let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
 
-    console.log(cartWithNoDuplicates)
+
+    const miniProducts = noDuplicates.map(obj =><MiniProduct selectedAttributes={obj.selectedAttributes} brand={obj.brand} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
+
 
     return ( 
         <div className="mini-cart slide-in">
