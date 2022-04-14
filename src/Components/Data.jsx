@@ -148,21 +148,31 @@ export default function Data(){
       const productSelected = data.categories[0].products.filter(product => product.name === e.target.childNodes[2].data)
       productSelected[0].inStock && setSelectedProduct(productSelected)
       setShowProductPage(true)
+      const firstAttributes = productSelected[0].attributes.map(obj => {return{attribute: obj.items[0].displayValue, id: obj.id}})
+      setSelectedAttributes(firstAttributes)
+    }
+
+    function handleGreenCart(product) {
+      const productSelected = data.categories[0].products.filter(obj => obj === product)
+      productSelected[0].inStock && setSelectedProduct(productSelected)
+      setShowProductPage(true)
+      const firstAttributes = productSelected[0].attributes.map(obj => {return{attribute: obj.items[0].displayValue, id: obj.id}})
+      setSelectedAttributes(firstAttributes)
     }
 
     function handleSelectedAttribute(e){
       setSelectedAttribute({attribute: e.target.innerText, id: e.target.id,}) 
     }
 
-  
-
     function productPageAddCart(e) {
       const newItem = data.categories[0].products.filter(obj => obj.name === e.target.parentElement.childNodes[0].childNodes[2].innerText)
       const itemData = newItem[0]
       const itemWithAttribute = {...itemData, selectedAttributes: selectedAttributes}
-      setCart(prev => [...prev, itemWithAttribute])
+     setCart(prev => [...prev, itemWithAttribute])
     }
 
+    console.log(cart)
+  
 
 
     return(
@@ -182,7 +192,7 @@ export default function Data(){
                     {!product.inStock ? <img style={{opacity:"0.4"}} src={product.gallery[0]} className="card-img" alt="" /> : <img src={product.gallery[0]} className="card-img" alt=""/>}
                     {!product.inStock && <div className="out-of-stock">OUT OF STOCK</div>}
                     {isHovering && product.inStock && !cartOpen && targetId === product.id &&  
-                    <div className="add-cart-btn" onClick={() => setCart(prev => [...prev, product])}>
+                    <div className="add-cart-btn" onClick={() => handleGreenCart(product)}>
                       <img className="add-cart" src="./images/white-cart.png" alt="" />
                     <div className="add-wheels">
                       <img src="./images/white-wheel.png" alt="" />
