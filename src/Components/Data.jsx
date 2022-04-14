@@ -110,7 +110,18 @@ export default function Data(){
     }
 
     function handleAdd(e) {
-      const newItem = data.categories[0].products.filter(obj => obj.gallery[0] === e.target.parentElement.parentNode.childNodes[2].currentSrc)
+      let attributeDivs = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes
+      let selectedAttributes = [...attributeDivs].map(obj => obj.innerText === "No " ? 'No' : obj.innerText)
+
+      let cartWithNoDuplicates = cart.reduce(function (previousValue, currentValue) {
+        if (previousValue.indexOf(currentValue) === -1) {
+            previousValue.push(currentValue)
+        }
+        return previousValue
+        }, [])
+    
+        let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
+      let newItem = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString())
       setCart(prev => [...prev, newItem[0]])
     }
 
