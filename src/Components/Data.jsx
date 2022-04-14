@@ -147,10 +147,12 @@ export default function Data(){
 
       let item = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString())
 
-      let idx = cart.map(obj => obj.selectedAttributes.toString()).lastIndexOf(item[0].selectedAttributes.toString())
+      let idx = cart.map(obj => JSON.stringify(obj.selectedAttributes)).lastIndexOf(JSON.stringify(item[0].selectedAttributes))
       let newCart = [...cart]
       let removed = newCart.splice(idx, 1)
       setCart(newCart)
+
+      console.log(idx, item)
     }
 
     function handleBagSubtract(e) {
