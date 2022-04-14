@@ -120,7 +120,8 @@ export default function Data(){
         return previousValue
         }, [])
     
-        let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
+      let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
+
       let newItem = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString())
       setCart(prev => [...prev, newItem[0]])
     }
@@ -132,8 +133,21 @@ export default function Data(){
 
 
     function handleSubtract(e) {
-      const item = data.categories[0].products.filter(obj => obj.gallery[0] === e.target.parentElement.parentNode.childNodes[2].currentSrc)
-      let idx = cart.lastIndexOf(item[0])
+      let attributeDivs = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes
+      let selectedAttributes = [...attributeDivs].map(obj => obj.innerText === "No " ? 'No' : obj.innerText)
+
+      let cartWithNoDuplicates = cart.reduce(function (previousValue, currentValue) {
+        if (previousValue.indexOf(currentValue) === -1) {
+            previousValue.push(currentValue)
+        }
+        return previousValue
+        }, [])
+    
+      let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
+
+      let item = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString())
+
+      let idx = cart.map(obj => obj.selectedAttributes.toString()).lastIndexOf(item[0].selectedAttributes.toString())
       let newCart = [...cart]
       let removed = newCart.splice(idx, 1)
       setCart(newCart)
