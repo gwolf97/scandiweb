@@ -5,7 +5,7 @@ const ProductPage = (props) => {
     const [mainImg, setMainImg] = React.useState(props.selectedProduct[0].gallery[0])
     
     const currency = props.currency
-    const galleryImages = props.selectedProduct[0].gallery.map(src => <img key={src} onClick={() => setMainImg(src)} src={src}/>)
+    const galleryImages = props.selectedProduct[0].gallery.map(src => <div className="gallery-img-container" key={src}><img onClick={() => setMainImg(src)} src={src}/></div>)
 
     let attOne = props.selectedAttributes.length >= 1 ? props.selectedAttributes[0] : {attribute: "", id:""}
     let attTwo = props.selectedAttributes.length >= 2 ? props.selectedAttributes[1] : {attribute: "", id:""}
@@ -27,7 +27,7 @@ const ProductPage = (props) => {
     return ( 
         <section className="product-page-section">
             <div className="product-page-container">
-                <div className="product-gallery"><h1>{galleryImages}</h1></div>
+                <div className="product-gallery">{galleryImages}</div>
                 <div><img className="main-img" src={mainImg} alt="" /></div>
                 <div className="product-description">
                     <div className="product-title">

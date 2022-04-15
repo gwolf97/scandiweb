@@ -200,7 +200,7 @@ export default function Data(){
                 <div onMouseOver={() => {
                   setIsHovering(true) ; setTargetId(product.id)
                 }}  key={product.id} className="product-card">
-                    {!product.inStock ? <img style={{opacity:"0.4"}} src={product.gallery[0]} className="card-img" alt="" /> : <img src={product.gallery[0]} className="card-img" alt=""/>}
+                    {!product.inStock ? <div className="card-img-container"><img style={{opacity:"0.4"}} src={product.gallery[0]} className="card-img" alt="" /> </div>: <img src={product.gallery[0]} className="card-img" alt=""/>}
                     {!product.inStock && <div className="out-of-stock">OUT OF STOCK</div>}
                     {isHovering && product.inStock && !cartOpen && targetId === product.id &&  
                     <div className="add-cart-btn" onClick={() => handleGreenCart(product)}>
