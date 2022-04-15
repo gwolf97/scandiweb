@@ -14,7 +14,7 @@ const MiniCart = (props) => {
     let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
 
 
-    const miniProducts = noDuplicates.map(obj =><MiniProduct selectedAttributes={obj.selectedAttributes} brand={obj.brand} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
+    const miniProducts = noDuplicates.map(obj =><MiniProduct key={obj + obj.selectedAttributes} selectedAttributes={obj.selectedAttributes} brand={obj.brand} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
 
 
     return ( 

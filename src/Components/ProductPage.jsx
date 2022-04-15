@@ -5,15 +5,16 @@ const ProductPage = (props) => {
     const [mainImg, setMainImg] = React.useState(props.selectedProduct[0].gallery[0])
     
     const currency = props.currency
-    const galleryImages = props.selectedProduct[0].gallery.map(src => <img onClick={() => setMainImg(src)} src={src}/>)
+    const galleryImages = props.selectedProduct[0].gallery.map(src => <img key={src} onClick={() => setMainImg(src)} src={src}/>)
 
     let attOne = props.selectedAttributes.length >= 1 ? props.selectedAttributes[0] : {attribute: "", id:""}
     let attTwo = props.selectedAttributes.length >= 2 ? props.selectedAttributes[1] : {attribute: "", id:""}
     let attThree = props.selectedAttributes.length >= 3 ? props.selectedAttributes[2] : {attribute: "", id:""}
     let attFour = props.selectedAttributes.length >= 4 ? props.selectedAttributes[3] : {attribute: "", id:""}
 
-    const attributes = props.selectedProduct[0].attributes.length > 0 ? props.selectedProduct[0].attributes.map(attribute => <div><p className="product-sub-title product-size-label">{attribute.name.toUpperCase()}</p>  <div className="mini-sizes sizes">{attribute.items.map(item => <div onClick={props.handleSelectedAttribute} className={attOne.attribute === item.displayValue && attOne.id === attribute.id || attTwo.attribute === item.displayValue && attTwo.id === attribute.id || attThree.attribute === item.displayValue && attThree.id === attribute.id || attFour.attribute === item.displayValue && attFour.id === attribute.id  ? "mini-size dark" : "mini-size size"} id={attribute.id} key={attribute.id + "" + item.id}>{item.displayValue}</div>)} </div> </div>) : <div></div> 
+    const attributes = props.selectedProduct[0].attributes.length > 0 ? props.selectedProduct[0].attributes.map(attribute => <div key={attribute.name}><p className="product-sub-title product-size-label">{attribute.name.toUpperCase()}</p>  <div className="mini-sizes sizes">{attribute.items.map(item => <div onClick={props.handleSelectedAttribute} className={attOne.attribute === item.displayValue && attOne.id === attribute.id || attTwo.attribute === item.displayValue && attTwo.id === attribute.id || attThree.attribute === item.displayValue && attThree.id === attribute.id || attFour.attribute === item.displayValue && attFour.id === attribute.id  ? "mini-size dark" : "mini-size size"} id={attribute.id} key={attribute.id + "" + item.id}>{item.displayValue}</div>)} </div> </div>) : <div></div> 
 
+        
 
     function removeTags(str) {
         if ((str===null) || (str===''))

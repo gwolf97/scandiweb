@@ -13,7 +13,7 @@ const CartPage = (props) => {
         
         let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
 
-        const products = noDuplicates.map(obj => <CartPageProduct selectedAttributes={obj.selectedAttributes} noDuplicates={noDuplicates} brand={obj.brand} gallery={obj.gallery} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
+        const products = noDuplicates.map(obj => <CartPageProduct key={obj} selectedAttributes={obj.selectedAttributes} noDuplicates={noDuplicates} brand={obj.brand} gallery={obj.gallery} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
 
 
     return ( 
