@@ -1,19 +1,10 @@
 const CartPageProduct = (props) => {
 
-        const data = props.cart.map(obj => obj.name)
-        
-        const amountOfItems = data.reduce(function(obj, name) {
-            if (!obj[name]) {
-                    obj[name] = 0;
-            }
-            obj[name]++;
-            return obj;
-          }, {});
-        
-          const amount = amountOfItems[props.name]
-
+    let amount = props.cart.filter(x => JSON.stringify(x.selectedAttributes) === JSON.stringify(props.selectedAttributes)).length
 
     const images = props.gallery.map(obj => <img src={obj}/>)
+
+    let attributeSquares = props.selectedAttributes.map(obj => obj !== "" && <div className={obj.attribute === "No" ? "hide" : "mini-size size product-att dark"}>{obj.attribute === "Yes" ? `${obj.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` : obj.attribute} </div>)
 
     return ( 
         <div className="mini-product product">
@@ -23,9 +14,10 @@ const CartPageProduct = (props) => {
                 <p className="mini-name name">{props.name}</p>
                 <p className="mini-price price">{props.symbol}{props.price}</p>
             </div>
-            <div className="mini-sizes sizes">
-                <div className="mini-size size">S</div>
-                <div className="mini-size size dark">M</div>
+            <div className="mini-sizes sizes product-att-container">
+                <div className="sizes-scroll">
+               {attributeSquares}
+               </div>
             </div>
         </div>
         <div className="mini-controls product-controls">

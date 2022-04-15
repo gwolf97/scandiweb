@@ -2,8 +2,6 @@ import CartPageProduct from "./CartPageProduct"
 
 const CartPage = (props) => {
 
-   
-
     let cartWithNoDuplicates = props.cart.reduce(function (previousValue, currentValue) {
         if (previousValue.indexOf(currentValue) === -1) {
             previousValue.push(currentValue)
@@ -13,9 +11,10 @@ const CartPage = (props) => {
        
         let currency = props.currency
         
-        const products = cartWithNoDuplicates.map(obj => <CartPageProduct brand={obj.brand} gallery={obj.gallery} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
+        let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
 
-      
+        const products = noDuplicates.map(obj => <CartPageProduct selectedAttributes={obj.selectedAttributes} noDuplicates={noDuplicates} brand={obj.brand} gallery={obj.gallery} handleAdd={props.handleAdd} handleSubtract={props.handleSubtract} cart={props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name}/>)
+
 
     return ( 
         <section className="cart-page-section">

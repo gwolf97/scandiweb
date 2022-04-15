@@ -126,12 +126,6 @@ export default function Data(){
       setCart(prev => [...prev, newItem[0]])
     }
 
-    function handleBagAdd(e) {
-      const newItem = data.categories[0].products.filter(obj => obj.gallery[0] === e.target.parentElement.parentNode.childNodes[2].childNodes[1].currentSrc)
-      setCart(prev => [...prev, newItem[0]])
-    }
-
-
     function handleSubtract(e) {
       let attributeDivs = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes
       let selectedAttributes = [...attributeDivs].map(obj => obj.innerText === "No " ? 'No' : obj.innerText)
@@ -148,16 +142,6 @@ export default function Data(){
       let item = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString())
 
       let idx = cart.map(obj => JSON.stringify(obj.selectedAttributes)).lastIndexOf(JSON.stringify(item[0].selectedAttributes))
-      let newCart = [...cart]
-      let removed = newCart.splice(idx, 1)
-      setCart(newCart)
-
-      console.log(idx, item)
-    }
-
-    function handleBagSubtract(e) {
-      const item = data.categories[0].products.filter(obj => obj.gallery[0] === e.target.parentElement.parentNode.childNodes[2].childNodes[1].currentSrc)
-      let idx = cart.lastIndexOf(item[0])
       let newCart = [...cart]
       let removed = newCart.splice(idx, 1)
       setCart(newCart)
@@ -198,7 +182,7 @@ export default function Data(){
      setCart(prev => [...prev, itemWithAttribute])
     }
 
-    console.log(cart)
+ 
   
 
 
@@ -233,7 +217,7 @@ export default function Data(){
             })}
           </div>
         </section>
-            {showCartPage && <CartPage currency={currency} total={total} handleAdd={handleBagAdd} handleSubtract={handleBagSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
+            {showCartPage && <CartPage selectedAttribute={selectedAttributes} currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
             {showProductPage && <ProductPage selectedAttributes={selectedAttributes} selectedAttribute={selectedAttribute} handleSelectedAttribute={handleSelectedAttribute} productPageAddCart={productPageAddCart} currency={currency} selectedProduct={selectedProduct}/>}
         </div>
         </div>

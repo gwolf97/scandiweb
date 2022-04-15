@@ -690,6 +690,11 @@ li a:active {
   height: 45px;
 }
 
+.product-att-container {
+  overflow: visible;
+  width: 100%;
+}
+
 .dark {
   background-color: black;
   color: white;
