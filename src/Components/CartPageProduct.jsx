@@ -13,7 +13,7 @@ const CartPageProduct = (props) => {
         <div className="mini-description description">
             <div className="mini-details details">
                 <p className="mini-brand brand">{props.brand}</p>
-                <p className="mini-name name">{props.name}</p>
+                <p onClick={props.handleSelectedProduct} className="mini-name name hover">{props.name}</p>
                 <p className="mini-price price">{props.symbol}{props.price}</p>
             </div>
             <div className="mini-sizes sizes product-att-container">

@@ -1,9 +1,13 @@
 import { printIntrospectionSchema } from "graphql";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const ProductPage = (props) => {
     const [mainImg, setMainImg] = React.useState(props.selectedProduct[0].gallery[0])
     
+    useEffect(() => {
+        setMainImg(props.selectedProduct[0].gallery[0])
+    }, [props.selectedProduct])
+
     const currency = props.currency
     const galleryImages = props.selectedProduct[0].gallery.map(src => <div className="gallery-img-container" key={src}><img onClick={() => setMainImg(src)} src={src}/></div>)
 

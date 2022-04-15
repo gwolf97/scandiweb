@@ -583,6 +583,7 @@ li a:active {
 
 .hover:hover {
   color: #5ece7b;
+  cursor: pointer;
 }
 
 .card-price {

@@ -160,6 +160,17 @@ export default function Data(){
       const productSelected = data.categories[0].products.filter(product => product.name === e.target.childNodes[2].data)
       productSelected[0].inStock && setSelectedProduct(productSelected)
       setShowProductPage(true)
+      setShowCartPage(false)
+      setCartOpen(false)
+      const firstAttributes = productSelected[0].attributes.map(obj => {return{attribute: obj.items[0].displayValue, id: obj.id}})
+      setSelectedAttributes(firstAttributes)
+    }
+    function handleSelectedProductCart(e) {
+      const productSelected = data.categories[0].products.filter(product => product.name === e.target.innerText)
+      productSelected[0].inStock && setSelectedProduct(productSelected)
+      setShowProductPage(true)
+      setShowCartPage(false)
+      setCartOpen(false)
       const firstAttributes = productSelected[0].attributes.map(obj => {return{attribute: obj.items[0].displayValue, id: obj.id}})
       setSelectedAttributes(firstAttributes)
     }
@@ -191,7 +202,7 @@ export default function Data(){
       <div>
         <Nav categoryNav={categoryNav} selectorOpen={currencySelectorOpen} toggleSelector={toggleCurrencySelector} cart={cart} toggleCart={toggleCart}/>
         {currencySelectorOpen && <CurrencySelector changeCurrency={changeCurrency}/>}
-        {cartOpen && <MiniCart viewCartPage={viewCartPage} currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
+        {cartOpen && <MiniCart handleSelectedProduct={handleSelectedProductCart} viewCartPage={viewCartPage} currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
         <div onClick={() => {setCartOpen(false) ; setCurrencySelectorOpen(false)}} className={cartOpen ? "fade-in" : ""} style={cartOpen ? {opacity:"0.7", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
         <h2 style={showCartPage || showProductPage ? {display: "none"} : {}} className="category-name">{categoryName}</h2>
         <section style={showCartPage || showProductPage ? {display: "none"} : {}}  className="products-section">
@@ -218,7 +229,7 @@ export default function Data(){
             })}
           </div>
         </section>
-            {showCartPage && <CartPage selectedAttribute={selectedAttributes} currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
+            {showCartPage && <CartPage handleSelectedProduct={handleSelectedProductCart} selectedAttribute={selectedAttributes} currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
             {showProductPage && <ProductPage selectedAttributes={selectedAttributes} selectedAttribute={selectedAttribute} handleSelectedAttribute={handleSelectedAttribute} productPageAddCart={productPageAddCart} currency={currency} selectedProduct={selectedProduct}/>}
         </div>
         </div>

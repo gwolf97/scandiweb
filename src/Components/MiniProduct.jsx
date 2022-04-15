@@ -12,7 +12,7 @@ const MiniProduct = (props) => {
             <div className="mini-description">
                 <div className="mini-details">
                     <p className="mini-brand">{props.brand}</p>
-                    <p className="mini-name">{props.name}</p>
+                    <p onClick={props.handleSelectedProduct} className="mini-name hover">{props.name}</p>
                     <p className="mini-price">{props.symbol}{props.price}</p>
                 </div>
                 <div className="mini-sizes">
