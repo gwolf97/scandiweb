@@ -91,6 +91,7 @@ export default function Data(){
       setSelectedProduct([])
       setSelectedAttribute("")
       setSelectedAttributes([])
+      setCartOpen(false)
     }
 
     function toggleCart(){

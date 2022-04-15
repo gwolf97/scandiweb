@@ -1,13 +1,14 @@
 import React from "react"
+import { nanoid } from "nanoid"
 
 const MiniProduct = (props) => {
 
     let amount = props.cart.filter(x => JSON.stringify(x.selectedAttributes) === JSON.stringify(props.selectedAttributes)).length
 
-  let attributeMiniSquares = props.selectedAttributes.map(obj => obj !== "" && <div key={obj.attribute + obj.id} className={obj.attribute === "No" ? "hide" : "mini-size"}>{obj.attribute === "Yes" ? `${obj.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` : obj.attribute} </div>)
+  let attributeMiniSquares = props.selectedAttributes.map(obj => obj !== "" && <div key={nanoid()} className={obj.attribute === "No" ? "hide" : "mini-size"}>{obj.attribute === "Yes" ? `${obj.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` : obj.attribute} </div>)
 
     return ( 
-        <div className="mini-product" key={props.name + props.brand + props.price}>
+        <div className="mini-product" key={nanoid()}>
             <div className="mini-description">
                 <div className="mini-details">
                     <p className="mini-brand">{props.brand}</p>

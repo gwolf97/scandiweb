@@ -876,6 +876,12 @@ li a:active {
   cursor: pointer;
 }
 
+.product-page-add-button:active {
+  -webkit-box-shadow: inset 1px 1px 10px #333;
+  -moz-box-shadow: inset 1px 1px 10px #333;
+  box-shadow: inset 1px 1px 10px #333;
+}
+
 .product-page-description {
   width: 292px;
   height: 103px;
