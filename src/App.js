@@ -1,13 +1,19 @@
 import './App.css';
 import React from 'react';
 import Data from './Components/Data';
+import {Component} from 'react'
 
-function App() {
-  return (
-    <main>
-      <Data/>
-    </main>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (<main>
+      <Data />
+    </main>);
+  }
+
 }
 
 export default App;

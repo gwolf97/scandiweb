@@ -1,3 +1,4 @@
+import { ProductGalleryPage } from './ProductGalleryPage';
 import React from 'react'
 import MiniCart from './MiniCart';
 import CurrencySelector from './CurrencySelector';
@@ -205,30 +206,7 @@ export default function Data(){
         {cartOpen && <MiniCart handleSelectedProduct={handleSelectedProductCart} viewCartPage={viewCartPage} currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
         <div onClick={() => {setCartOpen(false) ; setCurrencySelectorOpen(false)}} className={cartOpen ? "fade-in" : ""} style={cartOpen ? {opacity:"0.7", backgroundColor:"rgba(57, 55, 72, 0.22)", height:"2000px"} : {}}>
         <h2 style={showCartPage || showProductPage ? {display: "none"} : {}} className="category-name">{categoryName}</h2>
-        <section style={showCartPage || showProductPage ? {display: "none"} : {}}  className="products-section">
-          <div className="product-cards-container">
-            {data.categories[0].products.filter(obj => obj.category === category.category1 || obj.category === category.category2).map(product =>{
-                return(
-                <div onMouseOver={() => {
-                  setIsHovering(true) ; setTargetId(product.id)
-                }}  key={product.id} className="product-card">
-                    {!product.inStock ? <div className="card-img-container"><img style={{opacity:"0.4"}} src={product.gallery[0]} className="card-img" alt="" /> </div>: <img src={product.gallery[0]} className="card-img" alt=""/>}
-                    {!product.inStock && <div className="out-of-stock">OUT OF STOCK</div>}
-                    {isHovering && product.inStock && !cartOpen && targetId === product.id &&  
-                    <div className="add-cart-btn" onClick={() => handleGreenCart(product)}>
-                      <img className="add-cart" src="./images/white-cart.png" alt="" />
-                    <div className="add-wheels">
-                      <img src="./images/white-wheel.png" alt="" />
-                      <img src="./images/white-wheel.png" alt="" />
-                     </div>
-                    </div>}
-                    <p onClick={product.inStock ? handleSelectedProduct : null} className={product.inStock ? "card-name hover" : "card-name"}>{product.brand} {product.name}</p>
-                    <p className="card-price">{product.prices[currency].currency.symbol}{product.prices[currency].amount}</p>
-                </div>
-                )
-            })}
-          </div>
-        </section>
+            <ProductGalleryPage currency={currency} data={data} category={category} showCartPage={showCartPage} showProductPage={showProductPage} setIsHovering={setIsHovering} setTargetId={setTargetId} isHovering={isHovering} cartOpen={cartOpen} targetId={targetId} handleGreenCart={handleGreenCart} handleSelectedProduct={handleSelectedProduct}  />
             {showCartPage && <CartPage handleSelectedProduct={handleSelectedProductCart} selectedAttribute={selectedAttributes} currency={currency} total={total} handleAdd={handleAdd} handleSubtract={handleSubtract} cartOpen={cartOpen} symbol={symbol} cart={cart}/>}
             {showProductPage && <ProductPage selectedAttributes={selectedAttributes} selectedAttribute={selectedAttribute} handleSelectedAttribute={handleSelectedAttribute} productPageAddCart={productPageAddCart} currency={currency} selectedProduct={selectedProduct}/>}
         </div>

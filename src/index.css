@@ -704,8 +704,8 @@ li a:active {
 }
 
 .dark {
-  background-color: black;
-  color: white;
+  background-color: black !important;
+  color: whitesmoke !important;
   width: 63px;
   height: 45px;
   cursor: pointer;

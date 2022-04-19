@@ -1,19 +1,25 @@
 import { printIntrospectionSchema } from "graphql";
+import {Component} from "react"
 
-const CurrencySelector = (props) => {
-    return ( 
-        <div className="currency-selector">
-            <div onClick={props.changeCurrency} className="usd">
+class CurrencySelector extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (<div className="currency-selector">
+            <div onClick={this.props.changeCurrency} className="usd">
                 <p>$ USD</p>
             </div>
-            <div onClick={props.changeCurrency} className="gbp">
+            <div onClick={this.props.changeCurrency} className="gbp">
                 <p>£ GBP</p>
             </div>
-            <div onClick={props.changeCurrency} className="jpy">
+            <div onClick={this.props.changeCurrency} className="jpy">
                 <p>¥ JPY</p>
             </div>
-        </div>
-     );
+        </div>);
+  }
+
 }
  
 export default CurrencySelector;
