@@ -704,11 +704,16 @@ li a:active {
 }
 
 .dark {
-  background-color: black !important;
-  color: whitesmoke !important;
+  background-color: black;
+  color: white;
   width: 63px;
   height: 45px;
   cursor: pointer;
+  border: 1px solid black;
+}
+
+.selected {
+  border: 2px solid black !important;
 }
 
 .dark:hover {
