@@ -40,7 +40,11 @@ query{
 }
 `
 
-export default function Data(){
+
+
+
+
+export default function Data(props){
     const {error, data, loading} = useQuery(GET_PRODUCTS);
     const [isHovering, setIsHovering] = React.useState(false)
     const [targetId, setTargetId] = React.useState((""))
@@ -79,6 +83,7 @@ export default function Data(){
 
     if(loading) return <div>Loading...</div>;
     if(error) return <div>Error</div>;
+
 
     function categoryNav(e){
       e.target.innerText === "ALL" && setCategory({ category1:"tech",category2:"clothes"}) ; setCategoryName("All Products")
@@ -149,6 +154,7 @@ export default function Data(){
       setCart(newCart)
     }
 
+
     function viewCartPage(){
       setShowCartPage(true)
       setCartOpen(false)
@@ -194,10 +200,6 @@ export default function Data(){
       const itemWithAttribute = {...itemData, selectedAttributes: selectedAttributes}
      setCart(prev => [...prev, itemWithAttribute])
     }
-
- 
-  
-
 
     return(
       <div>

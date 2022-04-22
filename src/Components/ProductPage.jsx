@@ -37,8 +37,6 @@ class ProductPage extends Component {
     };
     const attributes = this.props.selectedProduct[0].attributes.length > 0 ? this.props.selectedProduct[0].attributes.map(attribute => <div key={attribute.name}><p className="product-sub-title product-size-label">{attribute.name.toUpperCase()}</p>  <div className="mini-sizes sizes">{attribute.items.map(item => <div onClick={this.props.handleSelectedAttribute} className={attOne.attribute === item.displayValue && attOne.id === attribute.id || attTwo.attribute === item.displayValue && attTwo.id === attribute.id || attThree.attribute === item.displayValue && attThree.id === attribute.id || attFour.attribute === item.displayValue && attFour.id === attribute.id ? "mini-size size dark" : "mini-size size"} style={item.value.includes("#") ? {backgroundColor: item.value, color:item.value} : {}} id={attribute.id} key={attribute.id + "" + item.id}>{item.displayValue}</div>)} </div> </div>) : <div></div>;
 
-    console.log(this.props.selectedProduct[0].attributes)
-
     function removeTags(str) {
       if (str === null || str === '') return false;else str = str.toString();
       return str.replace(/(<([^>]+)>)/ig, '');

@@ -5,15 +5,14 @@ import {Component} from "react"
 class Nav extends Component {
   constructor(props) {
     super(props);
-  }
-
-  render() {
     this.state = {
         all:{color: "#5ece7b"},
         tech: {},
         clothes:{},
   }
+  }
 
+  render() {
     return (<nav style={{
       marginBottom: "-58px"
     }}>
@@ -21,16 +20,21 @@ class Nav extends Component {
                 <li onClick={() => {
           this.setState({
             all:{color: "#5ece7b"},
-       
+            tech: {},
+            clothes:{},
           })
         }} style={this.state.all}><a onClick={this.props.categoryNav} href="#">ALL</a></li>
                 <li onClick={() => {
           this.setState({ 
+            all:{},
             tech: {color: "#5ece7b"},
+            clothes:{},
             })
         }} style={this.state.tech}><a onClick={this.props.categoryNav} href="#">TECH</a></li>
                 <li onClick={() => {
-          this.setState({ 
+          this.setState({
+            all:{},
+            tech: {},
             clothes:{color: "#5ece7b"},})
         }} style={this.state.clothes}><a onClick={this.props.categoryNav} href="#">CLOTHES</a></li>
             </ul>
