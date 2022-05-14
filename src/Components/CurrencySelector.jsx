@@ -14,6 +14,12 @@ class CurrencySelector extends Component {
             <div onClick={this.props.changeCurrency} className="gbp">
                 <p>£ GBP</p>
             </div>
+            <div onClick={this.props.changeCurrency} className="aud">
+                <p>A$ AUD</p>
+            </div>
+            <div onClick={this.props.changeCurrency} className="rub">
+                <p>₽ RUB</p>
+            </div>
             <div onClick={this.props.changeCurrency} className="jpy">
                 <p>¥ JPY</p>
             </div>

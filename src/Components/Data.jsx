@@ -113,8 +113,12 @@ export default function Data(props){
     function changeCurrency(e){
       e.target.innerText === "$ USD" && setCurrency(0)
       e.target.innerText === "£ GBP" && setCurrency(1)
+      e.target.innerText === "A$ AUD" && setCurrency(2)
       e.target.innerText === "¥ JPY" && setCurrency(3)
+      e.target.innerText === "₽ RUB" && setCurrency(4)
     }
+
+    console.log(data)
 
     function handleAdd(e) {
       let attributeDivs = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes
