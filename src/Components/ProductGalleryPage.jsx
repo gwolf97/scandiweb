@@ -28,7 +28,7 @@ export class ProductGalleryPage extends Component {
                      </div>
                     </div>}
                     <p onClick={product.inStock ? this.props.handleSelectedProduct : null} className={product.inStock ? "card-name hover" : "card-name"}>{product.brand} {product.name}</p>
-                    <p className="card-price">{product.prices[this.props.currency].currency.symbol}{product.prices[this.props.currency].amount}</p>
+                    <p className="card-price">{product.prices[this.props.currency].currency.symbol}{product.prices[this.props.currency].amount.toFixed(2)}</p>
                 </div>;
         })}
           </div>

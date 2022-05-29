@@ -54,7 +54,7 @@ class ProductPage extends Component {
                     <div className="product-size-price">
                        {attributes}
                         <p className="product-sub-title">PRICE:</p>
-                        <p className="product-price">{this.props.selectedProduct[0].prices[currency].currency.symbol}{this.props.selectedProduct[0].prices[currency].amount}</p>
+                        <p className="product-price">{this.props.selectedProduct[0].prices[currency].currency.symbol}{this.props.selectedProduct[0].prices[currency].amount.toFixed(2)}</p>
                     </div> 
                     <button onClick={this.props.productPageAddCart} className="product-page-add-button">ADD TO CART</button>
                     <p className="product-page-description">{removeTags(this.props.selectedProduct[0].description)}</p>

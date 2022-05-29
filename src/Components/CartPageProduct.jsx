@@ -15,7 +15,7 @@ class CartPageProduct extends Component {
             <div className="mini-details details">
                 <p className="mini-brand brand">{this.props.brand}</p>
                 <p onClick={this.props.handleSelectedProduct} className="mini-name name hover">{this.props.name}</p>
-                <p className="mini-price price">{this.props.symbol}{this.props.price}</p>
+                <p className="mini-price price">{this.props.symbol}{this.props.price.toFixed(2)}</p>
             </div>
             <div className="mini-sizes sizes product-att-container">
                 <div className="sizes-scroll">

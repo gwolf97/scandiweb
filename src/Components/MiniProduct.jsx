@@ -15,7 +15,7 @@ class MiniProduct extends Component {
                 <div className="mini-details">
                     <p className="mini-brand">{this.props.brand}</p>
                     <p onClick={this.props.handleSelectedProduct} className="mini-name hover">{this.props.name}</p>
-                    <p className="mini-price">{this.props.symbol}{this.props.price}</p>
+                    <p className="mini-price">{this.props.symbol}{this.props.price.toFixed(2)}</p>
                 </div>
                 <div className="mini-sizes">
                     <div className="sizes-scroll">
