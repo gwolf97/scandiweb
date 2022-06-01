@@ -11,14 +11,18 @@ import {Component} from "react"
 class ProductPage extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      mainImg: this.props.selectedProduct[0].gallery[0],
+    }
+  };
+
+  handleButtonClick(src){
+    this.setMainImg({mainImg: `${src}`})
   }
 
   render() {
-      this.state = {
-        mainImg: this.props.selectedProduct[0].gallery[0],
-      }
     const currency = this.props.currency;
-    const galleryImages = this.props.selectedProduct[0].gallery.map(src => <div className="gallery-img-container" key={src}><img onClick={() => this.setMainImg({mainImg:src})} src={src} /></div>);
+    const galleryImages = this.props.selectedProduct[0].gallery.map(src => <div className="gallery-img-container" key={src}><img src={src} onClick={() =>{this.handleButtonClick(src)}}  /></div>);
     let attOne = this.props.selectedAttributes.length >= 1 ? this.props.selectedAttributes[0] : {
       attribute: "",
       id: ""

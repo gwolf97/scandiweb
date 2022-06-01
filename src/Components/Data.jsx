@@ -168,14 +168,16 @@ export default function Data(props){
     }
 
     function handleSelectedProduct(e) {
-      const productSelected = data.categories[0].products.filter(product => product.name === e.target.childNodes[2].data)
-      productSelected[0].inStock && setSelectedProduct(productSelected)
+      console.log(e.target.parentElement.childNodes[2].childNodes[2].data)
+      const productSelected = data.categories[0].products.filter(product => product.name === (e.target.parentElement.childNodes[2].childNodes[2].data|| e.target.childNodes[2].childNodes[2].data || e.target.childNodes[2].data )) 
+      setSelectedProduct(productSelected)
       setShowProductPage(true)
       setShowCartPage(false)
       setCartOpen(false)
       const firstAttributes = productSelected[0].attributes.map(obj => {return{attribute: obj.items[0].displayValue, id: obj.id}})
       setSelectedAttributes(firstAttributes)
     }
+
     function handleSelectedProductCart(e) {
       const productSelected = data.categories[0].products.filter(product => product.name === e.target.innerText)
       productSelected[0].inStock && setSelectedProduct(productSelected)

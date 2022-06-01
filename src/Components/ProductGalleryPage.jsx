@@ -12,7 +12,7 @@ export class ProductGalleryPage extends Component {
     } : {}} className="products-section">
           <div className="product-cards-container">
             {this.props.data.categories[0].products.filter(obj => obj.category === this.props.category.category1 || obj.category === this.props.category.category2).map(product => {
-          return <div onMouseOver={() => {
+          return <div onClick={this.props.handleSelectedProduct} onMouseOver={() => {
             this.props.setIsHovering(true);
             this.props.setTargetId(product.id);
           }} key={product.id} className="product-card">
@@ -27,7 +27,7 @@ export class ProductGalleryPage extends Component {
                       <img src="./images/white-wheel.png" alt="" />
                      </div>
                     </div>}
-                    <p onClick={product.inStock ? this.props.handleSelectedProduct : null} className={product.inStock ? "card-name hover" : "card-name"}>{product.brand} {product.name}</p>
+                    <p onClick={this.props.handleSelectedProduct}  className={product.inStock ? "card-name hover" : "card-name"}>{product.brand} {product.name}</p>
                     <p className="card-price">{product.prices[this.props.currency].currency.symbol}{product.prices[this.props.currency].amount.toFixed(2)}</p>
                 </div>;
         })}
