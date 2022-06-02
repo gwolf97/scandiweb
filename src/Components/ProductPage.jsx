@@ -23,19 +23,19 @@ class ProductPage extends Component {
   render() {
     const currency = this.props.currency;
     const galleryImages = this.props.selectedProduct[0].gallery.map(src => <div className="gallery-img-container" key={src}><img src={src} onClick={() => this.handleButtonClick(src)}  /></div>);
-    let attOne = this.props.selectedAttributes.length >= 1 ? this.props.selectedAttributes[0] : {
+    const attOne = this.props.selectedAttributes.length >= 1 ? this.props.selectedAttributes[0] : {
       attribute: "",
       id: ""
     };
-    let attTwo = this.props.selectedAttributes.length >= 2 ? this.props.selectedAttributes[1] : {
+    const attTwo = this.props.selectedAttributes.length >= 2 ? this.props.selectedAttributes[1] : {
       attribute: "",
       id: ""
     };
-    let attThree = this.props.selectedAttributes.length >= 3 ? this.props.selectedAttributes[2] : {
+    const attThree = this.props.selectedAttributes.length >= 3 ? this.props.selectedAttributes[2] : {
       attribute: "",
       id: ""
     };
-    let attFour = this.props.selectedAttributes.length >= 4 ? this.props.selectedAttributes[3] : {
+    const attFour = this.props.selectedAttributes.length >= 4 ? this.props.selectedAttributes[3] : {
       attribute: "",
       id: ""
     };

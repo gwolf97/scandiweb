@@ -78,7 +78,7 @@ export default function Data(props){
       }))
     }, [selectedAttribute])
 
-    let symbol = cart.length > 0 ? cart[0].prices[currency].currency.symbol : ""
+    const symbol = cart.length > 0 ? cart[0].prices[currency].currency.symbol : ""
     const total = cart.map(obj => obj.prices[currency].amount).reduce((a,b) => a+b, 0).toFixed(2)   
 
     if(loading) return <div>Loading...</div>;
@@ -119,46 +119,46 @@ export default function Data(props){
     }
 
     function handleAdd(e) {
-      let attributeDivs = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes
-      let selectedAttributes = [...attributeDivs].map(obj => obj.innerText === "No " ? 'No' : obj.innerText)
+      const attributeDivs = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes
+      const selectedAttributes = [...attributeDivs].map(obj => obj.innerText === "No " ? 'No' : obj.innerText)
 
-      let cartWithNoDuplicates = cart.reduce(function (previousValue, currentValue) {
+      const cartWithNoDuplicates = cart.reduce(function (previousValue, currentValue) {
         if (previousValue.indexOf(currentValue) === -1) {
             previousValue.push(currentValue)
         }
         return previousValue
         }, [])
     
-      let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
+      const noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
 
-      let newItem = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString() && obj.name === e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[1].innerText)
+      const newItem = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString() && obj.name === e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[1].innerText)
       setCart(prev => [...prev, newItem[0]])
     }
 
     function handleSubtract(e) {
-      let attributeDivs = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes
-      let selectedAttributes = [...attributeDivs].map(obj => obj.innerText === "No " ? 'No' : obj.innerText)
+      const attributeDivs = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes
+      const selectedAttributes = [...attributeDivs].map(obj => obj.innerText === "No " ? 'No' : obj.innerText)
 
       
       console.log(e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[1].innerText)
 
-      let cartWithNoDuplicates = cart.reduce(function (previousValue, currentValue) {
+      const cartWithNoDuplicates = cart.reduce(function (previousValue, currentValue) {
         if (previousValue.indexOf(currentValue) === -1) {
             previousValue.push(currentValue)
         }
         return previousValue
         }, [])
     
-      let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
+      const noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
 
-      let item = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString() && obj.name.toString() === e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[1].innerText.toString())
+      const item = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString() && obj.name.toString() === e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[1].innerText.toString())
 
       console.log(item)
       console.log(cart)
 
-      let idx = cart.map(obj => `${obj.selectedAttributes[0].attribute + obj.name}`).lastIndexOf(`${item[0].selectedAttributes[0].attribute + item[0].name}`)
-      let newCart = [...cart]
-      let removed = newCart.splice(idx, 1)
+      const idx = cart.map(obj => `${obj.selectedAttributes[0].attribute + `${obj.selectedAttributes[1] ? obj.selectedAttributes[1].attribute : ""}`+ `${obj.selectedAttributes[2] ? obj.selectedAttributes[2].attribute : ""}` + obj.name}`).lastIndexOf(`${item[0].selectedAttributes[0].attribute + `${item[0].selectedAttributes[1] ? item[0].selectedAttributes[1].attribute : ""}` + `${item[0].selectedAttributes[2] ? item[0].selectedAttributes[2].attribute : ""}` + item[0].name}`)
+      const newCart = [...cart]
+      const removed = newCart.splice(idx, 1)
       setCart(newCart)
     }
 

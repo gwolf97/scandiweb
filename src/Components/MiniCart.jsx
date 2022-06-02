@@ -8,15 +8,15 @@ class MiniCart extends Component {
   }
 
   render() {
-    let cartWithNoDuplicates = this.props.cart.reduce(function (previousValue, currentValue) {
+    const cartWithNoDuplicates = this.props.cart.reduce(function (previousValue, currentValue) {
       if (previousValue.indexOf(currentValue) === -1) {
         previousValue.push(currentValue);
       }
 
       return previousValue;
     }, []);
-    let currency = this.props.currency;
-    let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
+    const currency = this.props.currency;
+    const noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
     const miniProducts = noDuplicates.map(obj => <MiniProduct handleSelectedProduct={this.props.handleSelectedProduct} key={nanoid()} selectedAttributes={obj.selectedAttributes} brand={obj.brand} handleAdd={this.props.handleAdd} handleSubtract={this.props.handleSubtract} cart={this.props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name} />);
     return (<div className="mini-cart slide-in">
             {this.props.cart.length === 0 ? <h3 style={{
