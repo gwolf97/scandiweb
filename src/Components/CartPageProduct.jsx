@@ -7,7 +7,7 @@ class CartPageProduct extends Component {
   }
 
   render() {
-    let amount = this.props.cart.filter(x => JSON.stringify(x.selectedAttributes) === JSON.stringify(this.props.selectedAttributes)).length;
+    let amount = this.props.cart.filter(x => JSON.stringify(x.selectedAttributes) === JSON.stringify(this.props.selectedAttributes) && x.name === this.props.name).length;
     const images = this.props.gallery.map(obj => <img key={amount + this.props.name + obj + this.props.selectedAttributes} src={obj} />);
     let attributeSquares = this.props.selectedAttributes.map(obj => obj !== "" && <div key={nanoid()} className={obj.attribute === "No" ? "hide" : "mini-size size product-att dark"}>{obj.attribute === "Yes" ? `${obj.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` : obj.attribute} </div>);
     return (<div key={nanoid()} className="mini-product product">
