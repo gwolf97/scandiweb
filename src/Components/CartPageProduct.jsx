@@ -10,12 +10,16 @@ class CartPageProduct extends Component {
     const amount = this.props.cart.filter(x => JSON.stringify(x.selectedAttributes) === JSON.stringify(this.props.selectedAttributes) && x.name === this.props.name).length;
     const images = this.props.gallery.map(obj => <img key={amount + this.props.name + obj + this.props.selectedAttributes} src={obj} />);
     const attributeSquares = this.props.selectedAttributes.map(obj => obj !== "" && <div key={nanoid()} className={obj.attribute === "No" ? "hide" : "mini-size size product-att dark"}>{obj.attribute === "Yes" ? `${obj.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` : obj.attribute} </div>);
+    const brand = this.props.brand
+    const name = this.props.name
+    const price = `${this.props.symbol}${this.props.price.toFixed(2)}`
+
     return (<div key={nanoid()} className="mini-product product">
         <div className="mini-description description">
             <div className="mini-details details">
-                <p className="mini-brand brand">{this.props.brand}</p>
-                <p onClick={this.props.handleSelectedProduct} className="mini-name name hover">{this.props.name}</p>
-                <p className="mini-price price">{this.props.symbol}{this.props.price.toFixed(2)}</p>
+                <p className="mini-brand brand">{brand}</p>
+                <p onClick={this.props.handleSelectedProduct} className="mini-name name hover">{name}</p>
+                <p className="mini-price price">{price}</p>
             </div>
             <div className="mini-sizes sizes product-att-container">
                 <div className="sizes-scroll">

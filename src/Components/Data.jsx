@@ -172,7 +172,6 @@ export default function Data(props){
     }
 
     function handleSelectedProduct(e) {
-      console.log(e.target.parentElement.parentElement.childNodes[2].childNodes[2].data)
       const productSelected = data.categories[0].products.filter(product => product.name === (e.target.parentElement.childNodes[2].childNodes[2].data || e.target.parentElement.parentElement.childNodes[2].childNodes[2].data || e.target.childNodes[2].childNodes[2].data || e.target.childNodes[2].data )) 
       setSelectedProduct(productSelected)
       setShowProductPage(true)

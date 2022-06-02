@@ -18,6 +18,8 @@ class MiniCart extends Component {
     const currency = this.props.currency;
     const noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
     const miniProducts = noDuplicates.map(obj => <MiniProduct handleSelectedProduct={this.props.handleSelectedProduct} key={nanoid()} selectedAttributes={obj.selectedAttributes} brand={obj.brand} handleAdd={this.props.handleAdd} handleSubtract={this.props.handleSubtract} cart={this.props.cart} img={obj.gallery[0]} price={obj.prices[currency].amount} symbol={obj.prices[currency].currency.symbol} name={obj.name} />);
+    const total = `${this.props.symbol}${this.props.total}`
+
     return (<div className="mini-cart slide-in">
             {this.props.cart.length === 0 ? <h3 style={{
         margin: "220px 0 0 90px"
@@ -27,7 +29,7 @@ class MiniCart extends Component {
             </div>
             {this.props.cart.length > 0 && <div>
                 <div className="mini-total">
-                    <p>Total</p><p><span>{this.props.symbol}{this.props.total}</span></p>
+                    <p>Total</p><p><span>{total}</span></p>
                 </div>
                 <div className="mini-btns">
                     <button onClick={this.props.viewCartPage} className="view-bag">VIEW BAG</button>

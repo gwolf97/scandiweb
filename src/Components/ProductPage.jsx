@@ -41,10 +41,16 @@ class ProductPage extends Component {
     };
     const attributes = this.props.selectedProduct[0].attributes.length > 0 ? this.props.selectedProduct[0].attributes.map(attribute => <div key={attribute.name}><p className="product-sub-title product-size-label">{attribute.name.toUpperCase()}</p>  <div className="mini-sizes sizes">{attribute.items.map(item => <div onClick={this.props.handleSelectedAttribute} className={attOne.attribute === item.displayValue && attOne.id === attribute.id || attTwo.attribute === item.displayValue && attTwo.id === attribute.id || attThree.attribute === item.displayValue && attThree.id === attribute.id || attFour.attribute === item.displayValue && attFour.id === attribute.id ? "mini-size size dark selected" : "mini-size size"} style={item.value.includes("#") ? {backgroundColor: item.value, color:item.value} : {}} id={attribute.id} key={attribute.id + "" + item.id}>{item.displayValue}</div>)} </div> </div>) : <div></div>;
 
+    const brand = this.props.selectedProduct[0].brand
+    const name = this.props.selectedProduct[0].name
+    const price = `${this.props.selectedProduct[0].prices[currency].currency.symbol}${this.props.selectedProduct[0].prices[currency].amount.toFixed(2)}`
+
+
     function removeTags(str) {
       if (str === null || str === '') return false;else str = str.toString();
       return str.replace(/(<([^>]+)>)/ig, '');
     }
+
 
     return (<section className="product-page-section">
             <div className="product-page-container">
@@ -52,13 +58,13 @@ class ProductPage extends Component {
                 <div className="main-img-container"><img className="main-img" src={this.state.mainImg} alt="" /></div>
                 <div className="product-description">
                     <div className="product-title">
-                        <h3 className="product-brand">{this.props.selectedProduct[0].brand}</h3><br />
-                        <h3 className="product-name">{this.props.selectedProduct[0].name}</h3>
+                        <h3 className="product-brand">{brand}</h3><br />
+                        <h3 className="product-name">{name}</h3>
                     </div> 
                     <div className="product-size-price">
                        {attributes}
                         <p className="product-sub-title">PRICE:</p>
-                        <p className="product-price">{this.props.selectedProduct[0].prices[currency].currency.symbol}{this.props.selectedProduct[0].prices[currency].amount.toFixed(2)}</p>
+                        <p className="product-price">{price}</p>
                     </div> 
                     <button onClick={this.props.selectedProduct[0].inStock ? this.props.productPageAddCart : null} className="product-page-add-button">{this.props.selectedProduct[0].inStock ? "ADD TO CART" : "OUT OF STOCK"}</button>
                     <p className="product-page-description">{removeTags(this.props.selectedProduct[0].description)}</p>
