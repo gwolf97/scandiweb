@@ -131,13 +131,16 @@ export default function Data(props){
     
       let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
 
-      let newItem = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString())
+      let newItem = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString() && obj.name === e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[1].innerText)
       setCart(prev => [...prev, newItem[0]])
     }
 
     function handleSubtract(e) {
       let attributeDivs = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes
       let selectedAttributes = [...attributeDivs].map(obj => obj.innerText === "No " ? 'No' : obj.innerText)
+
+      
+      console.log(e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[1].innerText)
 
       let cartWithNoDuplicates = cart.reduce(function (previousValue, currentValue) {
         if (previousValue.indexOf(currentValue) === -1) {
@@ -148,9 +151,12 @@ export default function Data(props){
     
       let noDuplicates = Array.from(new Set(cartWithNoDuplicates.map(JSON.stringify))).map(JSON.parse);
 
-      let item = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString())
+      let item = noDuplicates.filter(obj => obj.selectedAttributes.map(x => x.attribute === "Yes" ? `${x.id === 'Touch ID in keyboard' ? "Touch ID" : "USB x 3"}` :  x.attribute).toString() === selectedAttributes.toString() && obj.name.toString() === e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[1].innerText.toString())
 
-      let idx = cart.map(obj => JSON.stringify(obj.selectedAttributes)).lastIndexOf(JSON.stringify(item[0].selectedAttributes))
+      console.log(item)
+      console.log(cart)
+
+      let idx = cart.map(obj => `${obj.selectedAttributes[0].attribute + obj.name}`).lastIndexOf(`${item[0].selectedAttributes[0].attribute + item[0].name}`)
       let newCart = [...cart]
       let removed = newCart.splice(idx, 1)
       setCart(newCart)
