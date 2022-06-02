@@ -118,8 +118,6 @@ export default function Data(props){
       e.target.innerText === "₽ RUB" && setCurrency(4)
     }
 
-    console.log(data)
-
     function handleAdd(e) {
       let attributeDivs = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes
       let selectedAttributes = [...attributeDivs].map(obj => obj.innerText === "No " ? 'No' : obj.innerText)
@@ -168,8 +166,7 @@ export default function Data(props){
     }
 
     function handleSelectedProduct(e) {
-      console.log(e.target.parentElement.childNodes[2].childNodes[2].data)
-      const productSelected = data.categories[0].products.filter(product => product.name === (e.target.parentElement.childNodes[2].childNodes[2].data|| e.target.childNodes[2].childNodes[2].data || e.target.childNodes[2].data )) 
+      const productSelected = data.categories[0].products.filter(product => product.name === (e.target.parentElement.parentElement.childNodes[2].childNodes[2].data || e.target.parentElement.childNodes[2].childNodes[2].data ||  e.target.childNodes[2].childNodes[2].data || e.target.childNodes[2].data )) 
       setSelectedProduct(productSelected)
       setShowProductPage(true)
       setShowCartPage(false)

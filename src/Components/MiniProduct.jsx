@@ -28,7 +28,9 @@ class MiniProduct extends Component {
                 <p className="mini-amount">{amount}</p>
                 <div onClick={this.props.handleSubtract} className="mini-subtract">-</div>
             </div>
-            <img src={this.props.img} alt="" />
+            <div className="mini-product-img-container">
+            <img className="mini-product-img" src={this.props.img} alt="" />
+            </div>
         </div>);
   }
 

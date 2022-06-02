@@ -17,12 +17,12 @@ class ProductPage extends Component {
   };
 
   handleButtonClick(src){
-    this.setMainImg({mainImg: `${src}`})
+    this.setState({mainImg: `${src}`})
   }
 
   render() {
     const currency = this.props.currency;
-    const galleryImages = this.props.selectedProduct[0].gallery.map(src => <div className="gallery-img-container" key={src}><img src={src} onClick={() =>{this.handleButtonClick(src)}}  /></div>);
+    const galleryImages = this.props.selectedProduct[0].gallery.map(src => <div className="gallery-img-container" key={src}><img src={src} onClick={() => this.handleButtonClick(src)}  /></div>);
     let attOne = this.props.selectedAttributes.length >= 1 ? this.props.selectedAttributes[0] : {
       attribute: "",
       id: ""
@@ -49,7 +49,7 @@ class ProductPage extends Component {
     return (<section className="product-page-section">
             <div className="product-page-container">
                 <div className="product-gallery">{galleryImages}</div>
-                <div><img className="main-img" src={this.state.mainImg} alt="" /></div>
+                <div className="main-img-container"><img className="main-img" src={this.state.mainImg} alt="" /></div>
                 <div className="product-description">
                     <div className="product-title">
                         <h3 className="product-brand">{this.props.selectedProduct[0].brand}</h3><br />

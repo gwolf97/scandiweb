@@ -350,9 +350,15 @@ li a:active {
   display: none;
 }
 
-.mini-product img {
+.mini-product-img-container {
   width: 105px;
   height: 137px;
+}
+
+.mini-product-img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
   opacity: 1;
 }
 
@@ -827,7 +833,18 @@ li a:active {
   height: 110px;
 }
 
+.main-img-container {
+  display: flex;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  overflow-x: scroll;
+}
+
 .main-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   display: flex;
   position: relative;
   left: 0px;
@@ -894,7 +911,8 @@ li a:active {
 
 .product-page-description {
   width: 292px;
-  height: 103px;
+  height: 203px;
+  overflow-y: scroll;
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
